@@ -10,7 +10,7 @@ public class Mrbean extends MomCharacter {
         super.setSpeed(2);
         super.startAnimation();
         super.startMove();
-        setmoveXY(4);
+        setmoveXY(1);
 
         setLayout(null);
         JLabel l = new JLabel("LV.1");

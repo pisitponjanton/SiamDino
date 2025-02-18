@@ -18,8 +18,14 @@ public abstract class MomButton extends JButton {
         setFocusPainted(false);
     }
 
+    public void setNamePath(String p){
+        this.namePath = p;
+        this.drawBackgroundImage();
+        repaint();
+    }
+
     private void drawBackgroundImage() {
-        backgroundImage = new ImageIcon("img/buttonImage/" + this.namePath + ".jpg").getImage();
+        backgroundImage = new ImageIcon("img/buttonImage/" + this.namePath + ".png").getImage();
     }
 
     @Override
