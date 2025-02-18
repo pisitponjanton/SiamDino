@@ -2,13 +2,14 @@ package Link_Panel;
 
 import AllMom.MomBackground;
 import Background_component.NameGame;
+import Button_component.Start;
 import Character_component.Mrbean;
 import Character_component.Snowkuy;
 import java.awt.*;
 import javax.swing.*;
 
 public class MenuPanel extends MomBackground {
-    private JButton startButton;
+    private Start startButton;
     private Mrbean mrbean;
     private Snowkuy snowkuy;
     private NameGame namegame;
@@ -18,8 +19,7 @@ public class MenuPanel extends MomBackground {
 
         setLayout(null);
 
-        startButton = new JButton("Start");
-        styleButton(startButton);
+        startButton = new Start();
         startButton.addActionListener(new CardSwitcher(cardLayout, mainPanel, "GamePanel"));
         add(startButton);
 
@@ -31,14 +31,5 @@ public class MenuPanel extends MomBackground {
 
         add(snowkuy);
         add(mrbean);
-    }
-
-    private void styleButton(JButton button) {
-        button.setFont(new Font("Arial", Font.BOLD, 50));
-        button.setForeground(Color.WHITE);
-        button.setBorderPainted(false);
-        button.setFocusPainted(false);
-        button.setBounds(600,400, 200, 50);
-        button.setCursor(new Cursor(Cursor.HAND_CURSOR));
     }
 }
