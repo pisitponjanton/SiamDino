@@ -1,5 +1,6 @@
 package Button_component;
 
+import AllMom.Animation;
 import AllMom.MomButton;
 import java.awt.event.*;
 import javax.swing.event.*;
@@ -8,6 +9,7 @@ public class Start extends MomButton {
     public Start() {
         super("Start", 196, 68);
         setLocation(600, 400);
+        new Animation(this, 0);
         addMouseListener(new MouseInputListener() {
             @Override
             public void mouseClicked(MouseEvent e) {

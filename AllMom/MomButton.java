@@ -18,7 +18,7 @@ public abstract class MomButton extends JButton {
         setFocusPainted(false);
     }
 
-    public void setNamePath(String p){
+    public void setNamePath(String p) {
         this.namePath = p;
         this.drawBackgroundImage();
         repaint();

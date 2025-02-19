@@ -1,13 +1,12 @@
 package AllMom;
 
+import Character_component.Move;
 import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import javax.imageio.ImageIO;
 import javax.swing.*;
-
-import Character_component.Move;
 
 public abstract class MomCharacter extends JPanel implements Move {
     private final ArrayList<Image> frames = new ArrayList<>();
@@ -18,19 +17,29 @@ public abstract class MomCharacter extends JPanel implements Move {
     private float xOffset;
     private float yOffset;
     private float speed;
-
     private int moveXY;
+
+    private int moveHow;
+    private int step = 0;
 
     public MomCharacter(int width, int height, int x, int y, String namePath) {
         setOpaque(false);
         setSize(width, height);
-        setLocation(x,y);
+        setLocation(x, y);
         this.namePath = namePath;
         this.xOffset = x;
         this.yOffset = y;
         this.moveXY = 0;
         this.speed = 2.5f;
         loadFrames();
+    }
+
+    protected void setMoveHow(int moveHow) {
+        this.moveHow = moveHow;
+    }
+
+    public int getStep() {
+        return this.step;
     }
 
     protected void setxOffset(float xOffset) {
@@ -49,11 +58,11 @@ public abstract class MomCharacter extends JPanel implements Move {
         return this.speed;
     }
 
-    protected void setmoveXY(int b) {
+    public void setmoveXY(int b) {
         this.moveXY = b;
     }
 
-    protected int getmoveXY() {
+    public int getmoveXY() {
         return this.moveXY;
     }
 
@@ -112,11 +121,11 @@ public abstract class MomCharacter extends JPanel implements Move {
             currentFrame = (currentFrame == 0) ? 0 : 0;
         } else if (this.move == 1) {
             currentFrame = (currentFrame == 1) ? 2 : 1;
-        } else if(this.move == 2){
+        } else if (this.move == 2) {
             currentFrame = (currentFrame == 3) ? 4 : 3;
-        }else if(this.move == 3){
+        } else if (this.move == 3) {
             currentFrame = (currentFrame == 5) ? 6 : 5;
-        }else{
+        } else {
             currentFrame = (currentFrame == 7) ? 8 : 7;
         }
     }
@@ -137,37 +146,159 @@ public abstract class MomCharacter extends JPanel implements Move {
                     this.move = 3;
                     this.characterMoveD();
                 }
-                case 3->{
-                    this.move = 0;//4
+                case 3 -> {
+                    this.move = 0;// 4
                     this.characterMoveU();
                 }
                 default -> {
                     this.move = 0;
                 }
             }
-            checkBoundary();
+            moveRandom();
         });
         timer.start();
     }
 
-
-    // เดินรอบจอ เป็นวงกลม //ยังไม่เสร็จ
-    private void checkBoundary() {
-        int minX = 0;
-        int minY = 0;
-        int maxX = 1100;
-        int maxY = 545;
-    
+    private void moveRandom() {
         Point location = getLocation();
-        if(location.x >= maxX && this.move == 1){
-            this.setmoveXY(3);
-        }else if(location.y <= minY && this.move == 0) {
-            this.setmoveXY(1);
-        }else if(location.x <= minX && this.move == 2){
-            this.setmoveXY(2);
-        }else if(location.y >= maxY && this.move == 3){
-            this.setmoveXY(0);
+        if (this.moveHow == 0) {
+            this.moveHow_1(location);
+        } else if (this.moveHow == 1) {
+            this.moveHow_2(location);
         }
     }
-    
+
+    private void moveHow_1(Point location) {
+        switch (step) {
+            case 0 -> {
+                if (location.x <= 750) {
+                    setmoveXY(3);
+                    step++;
+                }
+            }
+            case 1 -> {
+                if (location.y <= 280) {
+                    setmoveXY(1);
+                    step++;
+                }
+            }
+            case 2 -> {
+                if (location.x <= 620) {
+                    setmoveXY(2);
+                    step++;
+                }
+            }
+            case 3 -> {
+                if (location.y > 330) {
+                    setmoveXY(1);
+                    step++;
+                }
+            }
+            case 4 -> {
+                if (location.x <= 350) {
+                    setmoveXY(3);
+                    step++;
+                }
+            }
+            case 5 -> {
+                if (location.y <= 0) {
+                    setmoveXY(1);
+                    step++;
+                }
+            }
+            case 6 -> {
+                if (location.x <= 220) {
+                    setmoveXY(2);
+                    step++;
+                }
+            }
+            case 7 -> {
+                if (location.y >= 130) {
+                    setmoveXY(0);
+                    step++;
+                }
+            }
+            case 8 -> {
+                if (location.x >= 350) {
+                    setmoveXY(2);
+                    step++;
+                }
+            }
+            case 9 -> {
+                if (location.y >= 330) {
+                    setmoveXY(1);
+                    if (location.x <= 0) {
+                        step = -1;
+                    }
+                }
+            }
+        }
+    }
+
+    private void moveHow_2(Point location) {
+        switch (step) {
+            case 0 -> {
+                if (location.x <= 750) {
+                    setmoveXY(3);
+                    step++;
+                }
+            }
+            case 1 -> {
+                if (location.y <= 280) {
+                    setmoveXY(1);
+                    step++;
+                }
+            }
+            case 2 -> {
+                if (location.x <= 700) {
+                    setmoveXY(3);
+                    step++;
+                }
+            }
+            case 3 -> {
+                if (location.y <= 0) {
+                    setmoveXY(0);
+                    step++;
+                }
+            }
+            case 4 -> {
+                if (location.x >= 1300) {
+                    setmoveXY(2);
+                    step++;
+                }
+            }
+            case 5 -> {
+                if (location.y >= 330) {
+                    setmoveXY(1);
+                    step++;
+                }
+            }
+            case 6 -> {
+                if (location.x <= 750) {
+                    setmoveXY(3);
+                    step++;
+                }
+            }
+            case 7 -> {
+                if (location.y <= 280) {
+                    setmoveXY(1);
+                    step++;
+                }
+            }
+            case 8 -> {
+                if (location.x <= 620) {
+                    setmoveXY(2);
+                    step++;
+                }
+            }
+            case 9 -> {
+                if (location.y > 330) {
+                    setmoveXY(1);
+                    if (location.x <= 0) {
+                        step = -1;
+                    }
+                }
+            }
+        }
+    }
 }
