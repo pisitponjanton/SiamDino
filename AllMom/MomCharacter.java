@@ -5,6 +5,7 @@ import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Random;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 
@@ -30,7 +31,7 @@ public abstract class MomCharacter extends JPanel implements Move {
         this.xOffset = x;
         this.yOffset = y;
         this.moveXY = 0;
-        this.speed = 2.5f;
+        this.speed = 1;
         loadFrames();
     }
 
@@ -99,7 +100,7 @@ public abstract class MomCharacter extends JPanel implements Move {
     }
 
     private void loadFrames() {
-        for (int i = 1; i <= 9; i++) {
+        for (int i = 1; i <= 10; i++) {
             try {
                 Image img = ImageIO.read(new File("img/Character/" + namePath + "/Character" + i + ".png"));
                 frames.add(img);
@@ -118,7 +119,7 @@ public abstract class MomCharacter extends JPanel implements Move {
 
     protected void howMove() {
         if (this.move == 0) {
-            currentFrame = (currentFrame == 0) ? 0 : 0;
+            currentFrame = (currentFrame == 0) ? 7 : 0;
         } else if (this.move == 1) {
             currentFrame = (currentFrame == 1) ? 2 : 1;
         } else if (this.move == 2) {
@@ -126,7 +127,7 @@ public abstract class MomCharacter extends JPanel implements Move {
         } else if (this.move == 3) {
             currentFrame = (currentFrame == 5) ? 6 : 5;
         } else {
-            currentFrame = (currentFrame == 7) ? 8 : 7;
+            currentFrame = (currentFrame == 8) ? 9 : 8;
         }
     }
 
@@ -147,7 +148,7 @@ public abstract class MomCharacter extends JPanel implements Move {
                     this.characterMoveD();
                 }
                 case 3 -> {
-                    this.move = 0;// 4
+                    this.move = 4;
                     this.characterMoveU();
                 }
                 default -> {
@@ -161,11 +162,12 @@ public abstract class MomCharacter extends JPanel implements Move {
 
     private void moveRandom() {
         Point location = getLocation();
-        if (this.moveHow == 0) {
-            this.moveHow_1(location);
-        } else if (this.moveHow == 1) {
-            this.moveHow_2(location);
-        }
+        // if (this.moveHow == 0) {
+        // this.moveHow_1(location);
+        // } else if (this.moveHow == 1) {
+        // this.moveHow_2(location);
+        // }
+        moveHow_Main(location);
     }
 
     private void moveHow_1(Point location) {
@@ -301,4 +303,103 @@ public abstract class MomCharacter extends JPanel implements Move {
             }
         }
     }
+
+    Random random = new Random();
+
+    private void moveHow_Main(Point location) {
+        double x = location.x;
+        double y = location.y;
+
+        if ((x >= 1309 && x <= 1310) && (y >= 329 && y <= 330)) {
+            int ran = random.nextInt(2);
+            setmoveXY(ran == 0 ? 3 : 1);
+        }
+
+        if ((x >= 1309 && x <= 1310) && (y >= 239 && y <= 240)) {
+            int ran = random.nextInt(3);
+            switch (ran) {
+                case 0 -> setmoveXY(2);
+                case 1 -> setmoveXY(1);
+                default -> setmoveXY(3);
+            }
+        }
+
+        if ((x >= 1309 && x <= 1310) && y <= 0) {
+            int ran = random.nextInt(2);
+            setmoveXY(ran == 0 ? 2 : 1);
+        }
+
+        if ((x >= 1107 && x <= 1108) && (y >= 239 && y <= 240)) {
+            int ran = random.nextInt(2);
+            setmoveXY(ran == 0 ? 2 : 0);
+        }
+
+        if ((x >= 1107 && x <= 1108) && (y >= 329 && y <= 330)) {
+            int ran = random.nextInt(4);
+            switch (ran) {
+                case 0 -> setmoveXY(1);
+                case 1 -> setmoveXY(0);
+                case 2 -> setmoveXY(3);
+                default -> setmoveXY(2);
+            }
+        }
+
+        if ((x >= 1107 && x <= 1108) && (y >= 414 && y <= 415)) {
+            int ran = random.nextInt(3);
+            switch (ran) {
+                case 0 -> setmoveXY(2);
+                case 1 -> setmoveXY(0);
+                default -> setmoveXY(3);
+            }
+        }
+
+        if ((x >= 1309 && x <= 1310) && (y >= 414 && y <= 415)) {
+            setmoveXY(1);
+        }
+
+        if ((x >= 1107 && x <= 1108) && (y >= 699 && y <= 700)) {
+            int ran = random.nextInt(2);
+            setmoveXY(ran == 0 ? 3 : 1);
+        }
+        ///wdwd
+        if ((x >= 894 && x <= 895) && (y >= 699 && y <= 700)) {
+            int ran = random.nextInt(2);
+            setmoveXY(ran == 0 ? 3 : 0);
+        }
+        ///dwd
+        if ((x >= 894 && x <= 895) && (y >= 479 && y <= 480)) {
+            int ran = random.nextInt(2);
+            setmoveXY(ran == 0 ? 1 : 2);
+        }
+        ///dwd
+        if ((x >= 679 && x <= 680) && (y >= 479 && y <= 480)) {
+            int ran = random.nextInt(3);
+            switch (ran) {
+                case 0 -> setmoveXY(3);
+                case 1 -> setmoveXY(0);
+                default -> setmoveXY(1);
+            }
+        }
+        // wdwd
+        if ((x >= 679 && x <= 680) && y <= 0) {
+            int ran = random.nextInt(2);
+            setmoveXY(ran == 0 ? 2 : 0);
+        }
+        ///hjhih
+        if ((x >= 454 && x <= 455) && (y >= 699 && y <= 700)) {
+            setmoveXY(3);
+        }
+
+        if((x >= 454 && x <= 455) && (y >= 479 && y <= 480)){
+            int ran = random.nextInt(4);
+            switch (ran) {
+                case 0 -> setmoveXY(3);
+                case 1 -> setmoveXY(0);
+                case 2 -> setmoveXY(2);
+                default -> setmoveXY(1);
+            }
+        }
+
+    }
+
 }

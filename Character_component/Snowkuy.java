@@ -7,7 +7,6 @@ public class Snowkuy extends MomCharacter {
         super(200, 200, 1300, 330, "snowkuy");
         super.startAnimation();
         super.startMove();
-        super.setSpeed(5);
         setSize(30,53);
         super.setMoveHow(moveHow);
 

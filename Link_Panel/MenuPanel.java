@@ -1,5 +1,6 @@
 package Link_Panel;
 
+import AllMom.Animation;
 import AllMom.MomBackground;
 import Background_component.NameGame;
 import Button_component.Start;
@@ -16,12 +17,12 @@ public class MenuPanel extends MomBackground {
         setLayout(null);
 
         startButton = new Start();
+        startButton.setLocation(600, 400);
+        new Animation(startButton, 0);
         startButton.addActionListener(new CardSwitcher(cardLayout, mainPanel, "GamePanel"));
         add(startButton);
 
         namegame = new NameGame();
         add(namegame);
-
-
     }
 }

@@ -4,12 +4,10 @@ import AllMom.MomCharacter;
 
 public class Mrbean extends MomCharacter {
     public Mrbean(int moveHow) {
-        super(45, 75, 1350, 330, "mrbean");
-        super.setSpeed(10);
+        super(30, 60, 1350, 330, "mrbean");
         super.startAnimation();
         super.startMove();
         super.setMoveHow(moveHow);
-        setSize(30, 60);
         // setmoveXY();
 
         setLayout(null);
