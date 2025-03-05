@@ -3,12 +3,10 @@ package Character_component;
 import AllMom.MomCharacter;
 
 public class Snowkuy extends MomCharacter {
-    public Snowkuy(int moveHow) {
-        super(200, 200, 1300, 330, "snowkuy");
-        super.startAnimation();
+    public Snowkuy(int x,int y,int how) {
+        super(30, 53, x, y, "snowkuy");
+        super.setmoveXY(how);
         super.startMove();
-        setSize(30,53);
-        super.setMoveHow(moveHow);
 
         setLayout(null);
         // JLabel l = new JLabel("LV.2");

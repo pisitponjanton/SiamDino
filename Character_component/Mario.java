@@ -3,9 +3,9 @@ package Character_component;
 import AllMom.MomCharacter;
 
 public class Mario extends MomCharacter {
-    public Mario() {
-        super(200, 200, 600, 540, "mario");
-        super.startAnimation();
+    public Mario(int x,int y,int how) {
+        super(30,53, x, y, "mario");
+        super.setmoveXY(how);
         super.startMove();
     }
 }

@@ -1,6 +1,9 @@
 package AllMom;
 
+import AllTread.AnimalThread.AnimationThread;
+import AllTread.AnimalThread.MoveThread;
 import java.awt.*;
+import java.awt.event.*;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -18,13 +21,21 @@ public abstract class MomAnimal extends JPanel {
 
     private int move;
 
+    private MoveThread moveThread;
+    private AnimationThread animationThread;
+
     public MomAnimal(String namePath, int moveX, int moveY) {
         this.namePath = namePath;
         this.moveX = moveX;
         this.moveY = moveY;
         this.addImage();
-        this.startMove();
-        this.startAnimation();
+        setCursor(new Cursor(Cursor.HAND_CURSOR));
+        addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e){
+                System.out.println("Eat");
+            }
+        });
         setOpaque(false);
     }
 
@@ -48,22 +59,19 @@ public abstract class MomAnimal extends JPanel {
         evo.add(imageList);
     }
 
-    private void startAnimation() {
-        Timer t = new Timer(50, _ -> {
-            howMove();
-            repaint();
-        });
-        t.start();
+    public void startMove() {
+        moveThread = new MoveThread(this);
+        animationThread = new AnimationThread(this);
+        moveThread.start();
+        animationThread.start();
     }
 
-    private void startMove() {
-        Timer t = new Timer(100, _ -> {
-            this.moveLoop();
-        });
-        t.start();
+    public void stopMove(){
+        moveThread.interrupt();
+        animationThread.interrupt();
     }
 
-    private void howMove() {
+    public void howMove() {
         if (this.move == 0) {
             currentFrame = (currentFrame + 1) % 4;
         } else {
@@ -72,7 +80,7 @@ public abstract class MomAnimal extends JPanel {
 
     }
 
-    private void moveLoop() {
+    public void moveLoop() {
         int x = getX();
         int speed = 5;
 

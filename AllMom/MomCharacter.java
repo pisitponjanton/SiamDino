@@ -1,5 +1,7 @@
 package AllMom;
 
+import AllTread.CharacterThread.AnimationThread;
+import AllTread.CharacterThread.MoveThread;
 import Character_component.Move;
 import java.awt.*;
 import java.io.File;
@@ -14,14 +16,15 @@ public abstract class MomCharacter extends JPanel implements Move {
     private int currentFrame = 0;
     private int move;
     private final String namePath;
+    private final Random random = new Random();
 
     private float xOffset;
     private float yOffset;
     private float speed;
     private int moveXY;
 
-    private int moveHow;
-    private int step = 0;
+    private AnimationThread animationThread;
+    private MoveThread moveThread;
 
     public MomCharacter(int width, int height, int x, int y, String namePath) {
         setOpaque(false);
@@ -35,12 +38,8 @@ public abstract class MomCharacter extends JPanel implements Move {
         loadFrames();
     }
 
-    protected void setMoveHow(int moveHow) {
-        this.moveHow = moveHow;
-    }
-
-    public int getStep() {
-        return this.step;
+    public void setMove(int move){
+        this.move = move;
     }
 
     protected void setxOffset(float xOffset) {
@@ -109,202 +108,28 @@ public abstract class MomCharacter extends JPanel implements Move {
         }
     }
 
-    protected void startAnimation() {
-        Timer timer = new Timer(100, _ -> {
-            this.howMove();
-            repaint();
-        });
-        timer.start();
-    }
-
-    protected void howMove() {
-        if (this.move == 0) {
-            currentFrame = (currentFrame == 0) ? 7 : 0;
-        } else if (this.move == 1) {
-            currentFrame = (currentFrame == 1) ? 2 : 1;
-        } else if (this.move == 2) {
-            currentFrame = (currentFrame == 3) ? 4 : 3;
-        } else if (this.move == 3) {
-            currentFrame = (currentFrame == 5) ? 6 : 5;
-        } else {
-            currentFrame = (currentFrame == 8) ? 9 : 8;
-        }
-    }
-
     @Override
-    public void startMove() {
-        Timer timer = new Timer(50, _ -> {
-            switch (this.moveXY) {
-                case 0 -> {
-                    this.move = 1;
-                    this.characterMoveR();
-                }
-                case 1 -> {
-                    this.move = 2;
-                    this.characterMoveL();
-                }
-                case 2 -> {
-                    this.move = 3;
-                    this.characterMoveD();
-                }
-                case 3 -> {
-                    this.move = 4;
-                    this.characterMoveU();
-                }
-                default -> {
-                    this.move = 0;
-                }
-            }
-            moveRandom();
-        });
-        timer.start();
+    public void startMove(){
+        animationThread = new AnimationThread(this);
+        moveThread = new MoveThread(this);
+        animationThread.start();
+        moveThread.start();
     }
 
-    private void moveRandom() {
+    public void howMove() {
+        currentFrame = switch (this.move) {
+            case 0 -> (currentFrame == 0) ? 7 : 0;
+            case 1 -> (currentFrame == 1) ? 2 : 1;
+            case 2 -> (currentFrame == 3) ? 4 : 3;
+            case 3 -> (currentFrame == 5) ? 6 : 5;
+            default -> (currentFrame == 8) ? 9 : 8;
+        };
+    }
+
+    public void moveRandom() {
         Point location = getLocation();
-        // if (this.moveHow == 0) {
-        // this.moveHow_1(location);
-        // } else if (this.moveHow == 1) {
-        // this.moveHow_2(location);
-        // }
         moveHow_Main(location);
     }
-
-    private void moveHow_1(Point location) {
-        switch (step) {
-            case 0 -> {
-                if (location.x <= 750) {
-                    setmoveXY(3);
-                    step++;
-                }
-            }
-            case 1 -> {
-                if (location.y <= 280) {
-                    setmoveXY(1);
-                    step++;
-                }
-            }
-            case 2 -> {
-                if (location.x <= 620) {
-                    setmoveXY(2);
-                    step++;
-                }
-            }
-            case 3 -> {
-                if (location.y > 330) {
-                    setmoveXY(1);
-                    step++;
-                }
-            }
-            case 4 -> {
-                if (location.x <= 350) {
-                    setmoveXY(3);
-                    step++;
-                }
-            }
-            case 5 -> {
-                if (location.y <= 0) {
-                    setmoveXY(1);
-                    step++;
-                }
-            }
-            case 6 -> {
-                if (location.x <= 220) {
-                    setmoveXY(2);
-                    step++;
-                }
-            }
-            case 7 -> {
-                if (location.y >= 130) {
-                    setmoveXY(0);
-                    step++;
-                }
-            }
-            case 8 -> {
-                if (location.x >= 350) {
-                    setmoveXY(2);
-                    step++;
-                }
-            }
-            case 9 -> {
-                if (location.y >= 330) {
-                    setmoveXY(1);
-                    if (location.x <= 0) {
-                        step = -1;
-                    }
-                }
-            }
-        }
-    }
-
-    private void moveHow_2(Point location) {
-        switch (step) {
-            case 0 -> {
-                if (location.x <= 750) {
-                    setmoveXY(3);
-                    step++;
-                }
-            }
-            case 1 -> {
-                if (location.y <= 280) {
-                    setmoveXY(1);
-                    step++;
-                }
-            }
-            case 2 -> {
-                if (location.x <= 700) {
-                    setmoveXY(3);
-                    step++;
-                }
-            }
-            case 3 -> {
-                if (location.y <= 0) {
-                    setmoveXY(0);
-                    step++;
-                }
-            }
-            case 4 -> {
-                if (location.x >= 1300) {
-                    setmoveXY(2);
-                    step++;
-                }
-            }
-            case 5 -> {
-                if (location.y >= 330) {
-                    setmoveXY(1);
-                    step++;
-                }
-            }
-            case 6 -> {
-                if (location.x <= 750) {
-                    setmoveXY(3);
-                    step++;
-                }
-            }
-            case 7 -> {
-                if (location.y <= 280) {
-                    setmoveXY(1);
-                    step++;
-                }
-            }
-            case 8 -> {
-                if (location.x <= 620) {
-                    setmoveXY(2);
-                    step++;
-                }
-            }
-            case 9 -> {
-                if (location.y > 330) {
-                    setmoveXY(1);
-                    if (location.x <= 0) {
-                        step = -1;
-                    }
-                }
-            }
-        }
-    }
-
-    Random random = new Random();
 
     private void moveHow_Main(Point location) {
         double x = location.x;
@@ -361,17 +186,17 @@ public abstract class MomCharacter extends JPanel implements Move {
             int ran = random.nextInt(2);
             setmoveXY(ran == 0 ? 3 : 1);
         }
-        ///wdwd
+
         if ((x >= 894 && x <= 895) && (y >= 699 && y <= 700)) {
             int ran = random.nextInt(2);
             setmoveXY(ran == 0 ? 3 : 0);
         }
-        ///dwd
+
         if ((x >= 894 && x <= 895) && (y >= 479 && y <= 480)) {
             int ran = random.nextInt(2);
             setmoveXY(ran == 0 ? 1 : 2);
         }
-        ///dwd
+
         if ((x >= 679 && x <= 680) && (y >= 479 && y <= 480)) {
             int ran = random.nextInt(3);
             switch (ran) {
@@ -380,17 +205,17 @@ public abstract class MomCharacter extends JPanel implements Move {
                 default -> setmoveXY(1);
             }
         }
-        // wdwd
+
         if ((x >= 679 && x <= 680) && y <= 0) {
             int ran = random.nextInt(2);
             setmoveXY(ran == 0 ? 2 : 0);
         }
-        ///hjhih
+
         if ((x >= 454 && x <= 455) && (y >= 699 && y <= 700)) {
             setmoveXY(3);
         }
 
-        if((x >= 454 && x <= 455) && (y >= 479 && y <= 480)){
+        if ((x >= 454 && x <= 455) && (y >= 479 && y <= 480)) {
             int ran = random.nextInt(4);
             switch (ran) {
                 case 0 -> setmoveXY(3);
@@ -399,6 +224,120 @@ public abstract class MomCharacter extends JPanel implements Move {
                 default -> setmoveXY(1);
             }
         }
+
+        if ((x >= 279 && x <= 280) && (y >= 479 && y <= 480)) {
+            int ran = random.nextInt(2);
+            setmoveXY(ran == 0 ? 3 : 0);
+        }
+
+        if ((x >= 279 && x <= 280) && (y >= 329 && y <= 330)) {
+            int ran = random.nextInt(3);
+            switch (ran) {
+                case 0 -> setmoveXY(2);
+                case 1 -> setmoveXY(0);
+                default -> setmoveXY(1);
+            }
+        }
+
+        if ((x >= 454 && x <= 455) && (y >= 329 && y <= 330)) {
+            int ran = random.nextInt(3);
+            switch (ran) {
+                case 0 -> setmoveXY(2);
+                case 1 -> setmoveXY(0);
+                default -> setmoveXY(1);
+            }
+        }
+
+        if ((x >= 359 && x <= 360) && (y >= 329 && y <= 330)) {
+            int ran = random.nextInt(3);
+            switch (ran) {
+                case 0 -> setmoveXY(3);
+                case 1 -> setmoveXY(0);
+                default -> setmoveXY(1);
+            }
+        }
+
+        if ((x >= 359 && x <= 360) && (y >= 139 && y <= 140)) {
+            int ran = random.nextInt(3);
+            switch (ran) {
+                case 0 -> setmoveXY(3);
+                case 1 -> setmoveXY(1);
+                default -> setmoveXY(2);
+            }
+        }
+
+        if ((x >= 219 && x <= 220) && (y >= 139 && y <= 140)) {
+            int ran = random.nextInt(2);
+            setmoveXY(ran == 0 ? 3 : 0);
+        }
+
+        if ((x >= 219 && x <= 220) && y <= 0 ) {
+            int ran = random.nextInt(2);
+            setmoveXY(ran == 0 ? 2 : 0);
+        }
+
+        if ((x >= 359 && x <= 360) && y <= 0 ) {
+            int ran = random.nextInt(2);
+            setmoveXY(ran == 0 ? 2 : 1);
+        }
+        //0
+        if ((x >= 619 && x <= 620) && (y >= 329 && y <= 330) ) {
+            int ran = random.nextInt(3);
+            switch (ran) {
+                case 0 -> setmoveXY(3);
+                case 1 -> setmoveXY(1);
+                default -> setmoveXY(2);
+            }
+        }
+        //0
+        if ((x >= 619 && x <= 620) && (y >= 279 && y <= 280) ) {
+            int ran = random.nextInt(2);
+            setmoveXY(ran == 0 ? 2 : 0);
+        }
+        //0
+        if ((x >= 619 && x <= 620) && (y >= 399 && y <= 400) ) {
+            int ran = random.nextInt(2);
+            setmoveXY(ran == 0 ? 3 : 0);
+        }
+
+        //2
+        if ((x >= 679 && x <= 680) && (y >= 399 && y <= 400) ) {
+            int ran = random.nextInt(3);
+            switch (ran) {
+                case 0 -> setmoveXY(0);
+                case 1 -> setmoveXY(1);
+                default -> setmoveXY(2);
+            }
+        }
+        //2
+        if ((x >= 754 && x <= 755) && (y >= 399 && y <= 400) ) {
+            int ran = random.nextInt(2);
+            setmoveXY(ran == 0 ? 3 : 1);
+        }
+
+        if ((x >= 754 && x <= 755) && (y >= 329 && y <= 330) ) {
+            int ran = random.nextInt(3);
+            switch (ran) {
+                case 0 -> setmoveXY(0);
+                case 1 -> setmoveXY(3);
+                default -> setmoveXY(2);
+            }
+        }
+
+        if ((x >= 754 && x <= 755) && (y >= 279 && y <= 280) ) {
+            int ran = random.nextInt(2);
+            setmoveXY(ran == 0 ? 2 : 1);
+        }
+
+        if ((x >= 679 && x <= 680) && (y >= 279 && y <= 280) ) {
+            int ran = random.nextInt(3);
+            switch (ran) {
+                case 0 -> setmoveXY(0);
+                case 1 -> setmoveXY(3);
+                default -> setmoveXY(1);
+            }
+        }
+
 
     }
 

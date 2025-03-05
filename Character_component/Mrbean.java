@@ -3,12 +3,10 @@ package Character_component;
 import AllMom.MomCharacter;
 
 public class Mrbean extends MomCharacter {
-    public Mrbean(int moveHow) {
-        super(30, 60, 1350, 330, "mrbean");
-        super.startAnimation();
+    public Mrbean(int x,int y,int how) {
+        super(30, 60, x, y, "mrbean");
+        super.setmoveXY(how);
         super.startMove();
-        super.setMoveHow(moveHow);
-        // setmoveXY();
 
         setLayout(null);
         // JLabel l = new JLabel("LV.1");

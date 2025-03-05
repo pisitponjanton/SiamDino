@@ -13,8 +13,8 @@ public class Main {
         cardLayout = new CardLayout();
         mainPanel = new JPanel(cardLayout);
 
-        MenuPanel startMenu = new MenuPanel(cardLayout, mainPanel);
         GamePanel gamePanel = new GamePanel(cardLayout, mainPanel);
+        MenuPanel startMenu = new MenuPanel(cardLayout, mainPanel,gamePanel);
         
         mainPanel.add(startMenu, "MenuPanel");
         mainPanel.add(gamePanel, "GamePanel");
