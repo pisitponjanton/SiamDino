@@ -10,11 +10,17 @@ import Background_component.Cage1;
 import Background_component.Cage2;
 import Background_component.TestManu;
 import Button_component.Start;
+import DataBase.DataBase;
+import DataBase.DataMap;
+import DataBase.DataUser;
 import java.awt.*;
 import java.util.ArrayList;
 import javax.swing.*;
 
 public class GamePanel extends MomBackground {
+    private DataUser dataUser;
+    private DataMap dataMap;
+
     private JButton backButton;
     private Image backgroundImage;
     private JLabel money;
@@ -30,6 +36,7 @@ public class GamePanel extends MomBackground {
 
     public GamePanel(CardLayout cardLayout, JPanel mainPanel) {
         super("bggame");
+
         backgroundImage = new ImageIcon("test.jpeg").getImage();
         backButton = new JButton("Back Game");
 
@@ -76,16 +83,20 @@ public class GamePanel extends MomBackground {
         return this.charactersList;
     }
 
-    public void start_Game() {
+    public void start_Game(DataUser dataUser) {
+        this.dataUser = dataUser;
+        dataMap = dataUser.getDataUser().get(0);
         randomCharacterThread = new RandomCharacterThread(this, charactersList);
         cleanerCharacterThread = new CleanerCharacterThraed(this,true, charactersList);
         checkCharacter = new CheckCharacter(randomCharacterThread, charactersList);
+        checkCharacter.setMax_Character(dataMap.getMax_Character());
         randomCharacterThread.start();
         cleanerCharacterThread.start();
         checkCharacter.start();
     }
     
     public void stop_Game() {
+        new DataBase(dataUser);
         randomCharacterThread.interrupt();
         cleanerCharacterThread.interrupt();
         checkCharacter.interrupt();

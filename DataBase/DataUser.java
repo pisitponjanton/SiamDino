@@ -1,7 +1,7 @@
 package DataBase;
 
 import java.io.*;
-import java.util.*;
+import java.util.ArrayList;
 
 public class DataUser implements Serializable{
     private ArrayList<DataMap> dataUser;

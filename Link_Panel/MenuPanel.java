@@ -11,7 +11,7 @@ public class MenuPanel extends MomBackground {
     private Start startButton;
     private NameGame namegame;
 
-    public MenuPanel(CardLayout cardLayout, JPanel mainPanel,GamePanel g) {
+    public MenuPanel(CardLayout cardLayout, JPanel mainPanel) {
         super("bg");
 
         setLayout(null);
@@ -19,10 +19,9 @@ public class MenuPanel extends MomBackground {
         startButton = new Start();
         startButton.setLocation(600, 400);
         new Animation(startButton, 0);
-        startButton.addActionListener(new CardSwitcher(cardLayout, mainPanel, "GamePanel"));
         startButton.addActionListener(_ ->{
-            g.start_Game();
-            System.out.println("GameStart");
+            cardLayout.show(mainPanel, "MapMenuPanel");
+            System.out.println("Start");
         });
         add(startButton);
 

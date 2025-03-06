@@ -7,6 +7,7 @@ public class CheckCharacter extends Thread{
     private boolean running;
     private RandomCharacterThread randomCharacterThread;
     private ArrayList<MomCharacter> charactersList;
+    private int max_character;
 
     public CheckCharacter(RandomCharacterThread randomCharacterThread,ArrayList<MomCharacter> charactersList){
         this.randomCharacterThread = randomCharacterThread;
@@ -18,7 +19,7 @@ public class CheckCharacter extends Thread{
         try {
             while (true) { 
                 setRunning();
-                if (charactersList.size() < 5) {
+                if (charactersList.size() < max_character) {
                     randomCharacterThread.running();
                 } else {
                     randomCharacterThread.stopping();
@@ -28,6 +29,10 @@ public class CheckCharacter extends Thread{
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
         }
+    }
+
+    public void setMax_Character(int max_character){
+        this.max_character = max_character;
     }
 
     public synchronized void setRunning(){
