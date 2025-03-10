@@ -24,11 +24,11 @@ public class MomThread extends Thread{
     }
     
     public synchronized void running(){
-        this.running = true;
+        this.running = false;
         notify();
     }
     
     public void stopping(){
-        this.running = false;
+        this.running = true;
     }
 }

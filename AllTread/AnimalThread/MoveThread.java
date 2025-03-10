@@ -27,6 +27,10 @@ public class MoveThread extends Thread{
         this.a.moveLoop();
     }
 
+    public boolean getRunning(){
+        return this.running;
+    }
+
     public synchronized void setRunning() {
         try {
             while (running) {

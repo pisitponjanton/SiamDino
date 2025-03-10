@@ -16,7 +16,7 @@ public class AnimationThread extends Thread{
             while (true) { 
                 setRunning();
                 startAnimation();
-                Thread.sleep(50);
+                Thread.sleep(300);
             }
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
@@ -28,6 +28,10 @@ public class AnimationThread extends Thread{
         this.a.repaint();
     }
 
+    public boolean getRunning(){
+        return this.running;
+    }
+    
     public synchronized void setRunning(){
         try {
             while (running) { 
@@ -39,11 +43,11 @@ public class AnimationThread extends Thread{
     }
     
     public synchronized void running(){
-        this.running = true;
+        this.running = false;
         notify();
     }
     
     public void stopping(){
-        this.running = false;
+        this.running = true;
     }
 }

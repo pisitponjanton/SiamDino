@@ -20,8 +20,12 @@ public class DataMap  implements Serializable{
         for (int i = 0; i < 7 ;i++) {
             String str = "Animal_"+(i+1);
             HashMap<String, Object> animal_new = new HashMap<>();
-            animal_new.put("Level", 0);
-            animal_new.put("Evo", 1);
+            if(i == 0){
+                animal_new.put("Level", 1);
+            }else{
+                animal_new.put("Level", 0);
+            }
+            animal_new.put("Evo", 0);
             animal.put(str, animal_new);
         }
 
