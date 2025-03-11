@@ -1,4 +1,4 @@
-package Background_component;
+package Background_component.Cage;
 
 import AllMom.MomAnimalCage;
 

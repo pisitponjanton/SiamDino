@@ -30,7 +30,6 @@ public class FeedAnimalThread extends Thread{
         try {
             while (running){
                 wait();
-                System.out.println("wait");
             }
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();

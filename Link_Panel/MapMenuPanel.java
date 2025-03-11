@@ -77,6 +77,7 @@ public class MapMenuPanel extends MomBackground {
                 }
             });
             jp1.add(b);
+            jp1.add(Box.createVerticalStrut(10));
             i_num++;
         }
     }

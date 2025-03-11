@@ -11,7 +11,7 @@ public class DataMap  implements Serializable{
     private int exp = 0;
     private HashMap<String, Object> animal;
     private Integer[] animal_cage;
-    private HashMap<String, Object> market;
+    private HashMap<String, Object> store;
 
     public DataMap(String name){
         this.name = name;
@@ -31,17 +31,17 @@ public class DataMap  implements Serializable{
 
         animal_cage = new Integer[7];
         for(int i = 0; i < animal_cage.length ; i++){
-            animal_cage[i] = 1;
+            animal_cage[i] = 0;
         }
 
-        market = new HashMap<>();
+        store = new HashMap<>();
         for (int i = 0; i < 3 ;i++) {
-            String str = "Market_"+(i+1);
-            HashMap<String, Integer> market_new = new HashMap<>();
-            market_new.put("Level", 0);
-            market_new.put("Evo", 1);
-            market_new.put("Profit", 150);
-            market.put(str, market_new);
+            String str = "Store_"+(i+1);
+            HashMap<String, Integer> store_new = new HashMap<>();
+            store_new.put("Level", 0);
+            store_new.put("Evo", 0);
+            store_new.put("Profit", 150);
+            store.put(str, store_new);
         }
     }
 
@@ -61,12 +61,12 @@ public class DataMap  implements Serializable{
         this.animal_cage = animal_cage;
     }
 
-    public HashMap<String, Object> getMarket(){
-        return this.market;
+    public HashMap<String, Object> getStore(){
+        return this.store;
     }
 
-    public void setMarket(HashMap<String, Object> market){
-        this.market = market;
+    public void setStore(HashMap<String, Object> store){
+        this.store = store;
     }
 
     public void setName(String name){

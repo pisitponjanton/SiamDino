@@ -3,10 +3,19 @@ package Link_Panel;
 import AllMom.*;
 import AllTread.GameThread.*;
 import Animal_component.Browny;
+import Animal_component.FlyMeToTheMoon;
 import Animal_component.Greenny;
 import Animal_component.Reddy;
 import Animal_component.StormFly;
 import Background_component.*;
+import Background_component.Cage.Cage1;
+import Background_component.Cage.Cage2;
+import Background_component.Cage.Cage3;
+import Background_component.Cage.Cage4;
+import Background_component.Cage.Cage5;
+import Background_component.Cage.Cage6;
+import Background_component.Cage.Cage7;
+import Background_component.Store.*;
 import Button_component.Start;
 import DataBase.*;
 import java.awt.*;
@@ -17,6 +26,8 @@ public class GamePanel extends MomBackground {
     private DataUser dataUser;
     private DataMap dataMap;
     private HashMap<String, Object> animal_1, animal_2, animal_3, animal_4, animal_5, animal_6, animal_7;
+    private Integer[] cage;
+    private HashMap<String, Object> store_1, store_2, store_3;
 
     private JButton backButton;
     private Image backgroundImage;
@@ -40,6 +51,11 @@ public class GamePanel extends MomBackground {
     private Browny browny;
     private StormFly stormFly;
     private Reddy reddy;
+    private FlyMeToTheMoon flyMeToTheMoon;
+
+    private Food food;
+    private Water water;
+    private Icream icream;
 
     public GamePanel(CardLayout cardLayout, JPanel mainPanel) {
         super("bggame");
@@ -50,7 +66,7 @@ public class GamePanel extends MomBackground {
         setLayout(null);
         backButton.setLocation(0, 0);
         backButton.setSize(100, 100);
-
+        backButton.setToolTipText("Back");
         backButton.addActionListener(_ -> {
             randomCharacterThread.cleanerList();
             this.stop_Game();
@@ -63,51 +79,28 @@ public class GamePanel extends MomBackground {
         t.setSize(500, 500);
         t.setLocation(500, 200);
         t.setVisible(false);
+
         Start s = new Start();
         s.setLocation(1150, 0);
         s.addActionListener(_ -> {
             // t.setVisible(!t.isVisible());
             animal_2.put("Level", 1);
             animal_3.put("Level", 1);
-            animal_3.put("Evo",2);
-            animal_1.put("Evo", 1);
-            animal_4.put("Level",1);
-            animal_4.put("Evo",2);
+            animal_3.put("Evo", 2);
+            animal_1.put("Evo", 2);
+            animal_4.put("Level", 1);
+            animal_4.put("Evo", 2);
+            store_3.put("Level", 1);
+            store_1.put("Evo", 2);
+            cage[2] = 2;
+            animal_5.put("Level", 1);
+            animal_5.put("Evo", 1);
         });
 
         // add(t);
         add(s);
+        allCage_Add();
 
-        // Bank b = new Bank(680, 280, 4);
-        // add(b);
-
-        c1 = new Cage1();
-        setComponentZOrder(c1, 0);
-        add(c1);
-
-        c2 = new Cage2();
-        setComponentZOrder(c2, 0);
-        add(c2);
-
-        c3 = new Cage3();
-        setComponentZOrder(c3, 0);
-        add(c3);
-
-        c4 = new Cage4();
-        setComponentZOrder(c4, 0);
-        add(c4);
-
-        c5 = new Cage5();
-        setComponentZOrder(c5, 0);
-        add(c5);
-
-        c6 = new Cage6();
-        setComponentZOrder(c6, 0);
-        add(c6);
-
-        c7 = new Cage7();
-        setComponentZOrder(c7, 0);
-        add(c7);
     }
 
     public void start_Game(DataUser dataUser, int index) {
@@ -115,8 +108,10 @@ public class GamePanel extends MomBackground {
         dataMap = dataUser.getDataUser().get(index);
         addAnimalThread = new Thread(() -> {
             try {
-                while (true) { 
+                while (true) {
                     loadAnimal();
+                    loadStore();
+                    loadCage();
                     Thread.sleep(10);
                 }
             } catch (InterruptedException e) {
@@ -138,14 +133,46 @@ public class GamePanel extends MomBackground {
         cleanerCharacterThread.interrupt();
         checkCharacter.interrupt();
         saveAnimal();
+        saveStore();
         addAnimalThread.interrupt();
         System.out.println("GameStop");
     }
 
-    @Override
-    protected void paintComponent(Graphics g) {
-        super.paintComponent(g);
-        g.drawImage(backgroundImage, 0, 0, getWidth(), getHeight(), this);
+    private void allCage_Add(){
+        c1 = new Cage1();
+        setComponentZOrder(c1, 0);
+        c1.setVisible(false);
+        add(c1);
+
+        c2 = new Cage2();
+        setComponentZOrder(c2, 0);
+        c2.setVisible(false);
+        add(c2);
+
+        c3 = new Cage3();
+        setComponentZOrder(c3, 0);
+        c3.setVisible(false);
+        add(c3);
+
+        c4 = new Cage4();
+        setComponentZOrder(c4, 0);
+        c4.setVisible(false);
+        add(c4);
+
+        c5 = new Cage5();
+        setComponentZOrder(c5, 0);
+        c5.setVisible(false);
+        add(c5);
+
+        c6 = new Cage6();
+        setComponentZOrder(c6, 0);
+        c6.setVisible(false);
+        add(c6);
+
+        c7 = new Cage7();
+        setComponentZOrder(c7, 0);
+        c7.setVisible(false);
+        add(c7);
     }
 
     @SuppressWarnings("unchecked")
@@ -174,7 +201,8 @@ public class GamePanel extends MomBackground {
         int level_7 = (int) animal_7.get("Level");
 
         if (level_1 > 0) {
-            if(greenny == null){
+            if (greenny == null) {
+                c1.setVisible(true);
                 greenny = new Greenny();
                 add(greenny);
                 setComponentZOrder(greenny, 1);
@@ -187,7 +215,8 @@ public class GamePanel extends MomBackground {
         }
 
         if (level_2 > 0) {
-            if(browny == null){
+            if (browny == null) {
+                c2.setVisible(true);
                 browny = new Browny();
                 add(browny);
                 setComponentZOrder(browny, 1);
@@ -200,7 +229,8 @@ public class GamePanel extends MomBackground {
         }
 
         if (level_3 > 0) {
-            if(stormFly == null){
+            if (stormFly == null) {
+                c6.setVisible(true);
                 stormFly = new StormFly();
                 add(stormFly);
                 setComponentZOrder(stormFly, 1);
@@ -213,7 +243,8 @@ public class GamePanel extends MomBackground {
         }
 
         if (level_4 > 0) {
-            if(reddy == null){
+            if (reddy == null) {
+                c3.setVisible(true);
                 reddy = new Reddy();
                 add(reddy);
                 setComponentZOrder(reddy, 1);
@@ -225,14 +256,19 @@ public class GamePanel extends MomBackground {
             reddy.setLevel(level_4);
         }
 
-        // if(evo_5 >= 0 ){
-        // greenny = new Greenny();
-        // greenny.startMove();
-        // greenny.setEvo(evo_5);
-        // greenny.setLevel(level_5);
-        // add(greenny);
-        // setComponentZOrder(greenny, 1);
-        // }
+        if (level_5 > 0) {
+            if (flyMeToTheMoon == null) {
+                c5.setVisible(true);
+                flyMeToTheMoon = new FlyMeToTheMoon();
+                add(flyMeToTheMoon);
+                setComponentZOrder(flyMeToTheMoon, 1);
+                flyMeToTheMoon.setEvo(evo_5);
+                flyMeToTheMoon.setLevel(level_5);
+                flyMeToTheMoon.startMove();
+            }
+            flyMeToTheMoon.setEvo(evo_5);
+            flyMeToTheMoon.setLevel(level_5);
+        }
 
         // if(evo_6 >= 0 ){
         // greenny = new Greenny();
@@ -253,27 +289,123 @@ public class GamePanel extends MomBackground {
         // }
     }
 
+    private void loadCage() {
+        cage = dataMap.getAnimal_Cage();
+        c1.setLevel(cage[0]);
+        c2.setLevel(cage[1]);
+        c3.setLevel(cage[2]);
+        c4.setLevel(cage[3]);
+        c5.setLevel(cage[4]);
+        c6.setLevel(cage[5]);
+        c7.setLevel(cage[6]);
+    }
+
     private void saveAnimal() {
         if (greenny != null) {
+            c1.setVisible(false);
             greenny.stopMove();
             remove(greenny);
             greenny = null;
         }
         if (browny != null) {
+            c2.setVisible(false);
             browny.stopMove();
             remove(browny);
             browny = null;
         }
         if (stormFly != null) {
+            c6.setVisible(false);
             stormFly.stopMove();
             remove(stormFly);
             stormFly = null;
         }
         if (reddy != null) {
+            c3.setVisible(false);
             reddy.stopMove();
             remove(reddy);
             reddy = null;
         }
+
+        if (flyMeToTheMoon != null) {
+            c5.setVisible(false);
+            flyMeToTheMoon.stopMove();
+            remove(flyMeToTheMoon);
+            flyMeToTheMoon = null;
+        }
     }
 
+    @SuppressWarnings("unchecked")
+    private void loadStore() {
+        store_1 = (HashMap<String, Object>) dataMap.getStore().get("Store_1");
+        store_2 = (HashMap<String, Object>) dataMap.getStore().get("Store_2");
+        store_3 = (HashMap<String, Object>) dataMap.getStore().get("Store_3");
+        int store_1_Level = (int) store_1.get("Level");
+        int store_1_Evo = (int) store_1.get("Evo");
+        int store_1_Profit = (int) store_1.get("Profit");
+        int store_2_Level = (int) store_2.get("Level");
+        int store_2_Evo = (int) store_2.get("Evo");
+        int store_2_Profit = (int) store_2.get("Profit");
+        int store_3_Level = (int) store_3.get("Level");
+        int store_3_Evo = (int) store_3.get("Evo");
+        int store_3_Profit = (int) store_3.get("Profit");
+
+        if (store_1_Level > 0) {
+            if (food == null) {
+                food = new Food();
+                add(food);
+                setComponentZOrder(food, 0);
+                food.setEvo(store_1_Evo);
+                food.setLevel(store_1_Level);
+                food.setProfit(store_1_Profit);
+            }
+            food.setEvo(store_1_Evo);
+            food.setLevel(store_1_Level);
+            food.setProfit(store_1_Profit);
+        }
+
+        if (store_2_Level > 0) {
+            if (water == null) {
+                water = new Water();
+                add(water);
+                setComponentZOrder(water, 0);
+                water.setEvo(store_2_Evo);
+                water.setLevel(store_2_Level);
+                water.setProfit(store_2_Profit);
+            }
+            water.setEvo(store_2_Evo);
+            water.setLevel(store_2_Level);
+            water.setProfit(store_2_Profit);
+        }
+
+        if (store_3_Level > 0) {
+            if (icream == null) {
+                icream = new Icream();
+                add(icream);
+                setComponentZOrder(icream, 0);
+                icream.setEvo(store_3_Evo);
+                icream.setLevel(store_3_Level);
+                icream.setProfit(store_3_Profit);
+            }
+            icream.setEvo(store_3_Evo);
+            icream.setLevel(store_3_Level);
+            icream.setProfit(store_3_Profit);
+        }
+    }
+
+    private void saveStore(){
+        if(food != null){
+            remove(food);
+            food = null;
+        }
+
+        if(water != null){
+            remove(water);
+            water = null;
+        }
+
+        if(icream != null){
+            remove(icream);
+            icream = null;
+        }
+    }
 }
