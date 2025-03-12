@@ -5,7 +5,7 @@ import AllMom.MomBackground;
 public class StatusBar extends MomBackground {
     public StatusBar() {
         super("statusBar");
-        setSize(300, 200);
-        setLocation(20, 20);
+        setSize(294, 60);
+        setLocation(0, 0);
     }
 }

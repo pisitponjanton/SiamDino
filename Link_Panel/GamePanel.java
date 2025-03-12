@@ -17,7 +17,6 @@ import DataBase.*;
 import java.awt.*;
 import java.util.*;
 import javax.swing.*;
-import javax.swing.border.Border;
 
 public class GamePanel extends MomBackground {
     private DataUser dataUser;
@@ -27,7 +26,6 @@ public class GamePanel extends MomBackground {
     private HashMap<String, Object> store_1, store_2, store_3;
 
     private JButton backButton;
-    private Image backgroundImage;
     private int sum;
     private Cage1 c1;
     private Cage2 c2;
@@ -58,13 +56,8 @@ public class GamePanel extends MomBackground {
 
     public GamePanel(CardLayout cardLayout, JPanel mainPanel) {
         super("bggame");
-
-        StatusBar statusBar = new StatusBar();
-        add(statusBar);
-        setComponentZOrder(statusBar, 0);
       
         jlb = new JLabel(money + " bath");
-        backgroundImage = new ImageIcon("test.jpeg").getImage();
         backButton = new JButton("Back Game");
 
         setLayout(null);
@@ -106,6 +99,10 @@ public class GamePanel extends MomBackground {
             animal_5.put("Level", 1);
             animal_5.put("Evo", 0);
         });
+
+        StatusBar statusBar = new StatusBar();
+        add(statusBar);
+        setComponentZOrder(statusBar, 0);
 
         // add(t);
         add(s);
@@ -368,7 +365,6 @@ public class GamePanel extends MomBackground {
             if (food == null) {
                 food = new Food();
                 add(food);
-                setComponentZOrder(food, 0);
                 food.setEvo(store_1_Evo);
                 food.setLevel(store_1_Level);
                 food.startStore();
@@ -396,7 +392,6 @@ public class GamePanel extends MomBackground {
             if (water == null) {
                 water = new Water();
                 add(water);
-                setComponentZOrder(water, 0);
                 water.setEvo(store_2_Evo);
                 water.setLevel(store_2_Level);
                 water.startStore();
@@ -421,7 +416,6 @@ public class GamePanel extends MomBackground {
             if (icream == null) {
                 icream = new Icream();
                 add(icream);
-                setComponentZOrder(icream, 0);
                 icream.setEvo(store_3_Evo);
                 icream.setLevel(store_3_Level);
                 icream.startStore();
