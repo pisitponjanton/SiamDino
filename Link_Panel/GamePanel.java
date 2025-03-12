@@ -17,6 +17,7 @@ import DataBase.*;
 import java.awt.*;
 import java.util.*;
 import javax.swing.*;
+import javax.swing.border.Border;
 
 public class GamePanel extends MomBackground {
     private DataUser dataUser;
@@ -40,7 +41,7 @@ public class GamePanel extends MomBackground {
     private CheckCharacter checkCharacter;
     private ArrayList<MomCharacter> charactersList = new ArrayList<>();
 
-    private Thread addAnimalThread,money_Food,money_Water,money_Icream;
+    private Thread addAnimalThread, money_Food, money_Water, money_Icream;
 
     private Greenny greenny;
     private Browny browny;
@@ -53,12 +54,16 @@ public class GamePanel extends MomBackground {
     private Icream icream;
 
     private JLabel jlb;
-    private double  money;
+    private double money;
 
     public GamePanel(CardLayout cardLayout, JPanel mainPanel) {
         super("bggame");
 
-        jlb = new JLabel(money+" bath");
+        StatusBar statusBar = new StatusBar();
+        add(statusBar);
+        setComponentZOrder(statusBar, 0);
+
+        jlb = new JLabel(money + " bath");
         backgroundImage = new ImageIcon("test.jpeg").getImage();
         backButton = new JButton("Back Game");
 
@@ -72,7 +77,7 @@ public class GamePanel extends MomBackground {
             cardLayout.show(mainPanel, "MenuPanel");
         });
         jlb.setLocation(500, 400);
-        jlb.setSize(100,100);
+        jlb.setSize(100, 100);
         add(jlb);
         add(backButton);
 
@@ -118,7 +123,7 @@ public class GamePanel extends MomBackground {
                     loadAnimal();
                     loadStore();
                     loadCage();
-                    jlb.setText(money+" bath");
+                    jlb.setText(money + " bath");
                     Thread.sleep(10);
                 }
             } catch (InterruptedException e) {
@@ -146,7 +151,7 @@ public class GamePanel extends MomBackground {
         System.out.println("GameStop");
     }
 
-    private void allCage_Add(){
+    private void allCage_Add() {
         c1 = new Cage1();
         setComponentZOrder(c1, 0);
         c1.setVisible(false);
@@ -363,13 +368,13 @@ public class GamePanel extends MomBackground {
                 food.setLevel(store_1_Level);
                 food.startStore();
 
-                money_Food = new Thread(()->{
-                    try{
-                        while (true) { 
+                money_Food = new Thread(() -> {
+                    try {
+                        while (true) {
                             Thread.sleep(2000);
                             money += food.getMoney_Profit();
                         }
-                    }catch(InterruptedException e){
+                    } catch (InterruptedException e) {
                     }
                 });
                 money_Food.start();
@@ -389,13 +394,13 @@ public class GamePanel extends MomBackground {
                 water.setLevel(store_2_Level);
                 water.startStore();
 
-                money_Water = new Thread(()->{
-                    try{
-                        while (true) { 
+                money_Water = new Thread(() -> {
+                    try {
+                        while (true) {
                             Thread.sleep(2000);
                             money += water.getMoney_Profit();
                         }
-                    }catch(InterruptedException e){
+                    } catch (InterruptedException e) {
                     }
                 });
                 money_Water.start();
@@ -413,13 +418,13 @@ public class GamePanel extends MomBackground {
                 icream.setLevel(store_3_Level);
                 icream.startStore();
 
-                money_Icream = new Thread(()->{
-                    try{
-                        while (true) { 
+                money_Icream = new Thread(() -> {
+                    try {
+                        while (true) {
                             Thread.sleep(2000);
                             money += icream.getMoney_Profit();
                         }
-                    }catch(InterruptedException e){
+                    } catch (InterruptedException e) {
                     }
                 });
                 money_Icream.start();
@@ -429,22 +434,22 @@ public class GamePanel extends MomBackground {
         }
     }
 
-    private void saveStore(){
-        if(food != null){
+    private void saveStore() {
+        if (food != null) {
             money_Food.interrupt();
             food.stopStore();
             remove(food);
             food = null;
         }
 
-        if(water != null){
+        if (water != null) {
             money_Water.interrupt();
             water.stopStore();
             remove(water);
             water = null;
         }
 
-        if(icream != null){
+        if (icream != null) {
             money_Icream.interrupt();
             icream.stopStore();
             remove(icream);
