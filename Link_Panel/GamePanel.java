@@ -17,6 +17,7 @@ import DataBase.*;
 import java.awt.*;
 import java.util.*;
 import javax.swing.*;
+import javax.swing.border.Border;
 
 public class GamePanel extends MomBackground {
     private DataUser dataUser;
@@ -58,6 +59,10 @@ public class GamePanel extends MomBackground {
     public GamePanel(CardLayout cardLayout, JPanel mainPanel) {
         super("bggame");
 
+        StatusBar statusBar = new StatusBar();
+        add(statusBar);
+        setComponentZOrder(statusBar, 0);
+      
         jlb = new JLabel(money + " bath");
         backgroundImage = new ImageIcon("test.jpeg").getImage();
         backButton = new JButton("Back Game");
@@ -368,13 +373,14 @@ public class GamePanel extends MomBackground {
                 food.setLevel(store_1_Level);
                 food.startStore();
 
+
                 money_Food = new Thread(()->{
                     try{
                         while (true) { 
                             Thread.sleep(food.getTime());
                             money += food.getMoney_Profit();
                         }
-                    }catch(InterruptedException e){
+                    } catch (InterruptedException e) {
                     }
                 });
                 money_Food.start();
@@ -401,7 +407,7 @@ public class GamePanel extends MomBackground {
                             Thread.sleep(water.getTime());
                             money += water.getMoney_Profit();
                         }
-                    }catch(InterruptedException e){
+                    } catch (InterruptedException e) {
                     }
                 });
                 money_Water.start();
@@ -420,13 +426,15 @@ public class GamePanel extends MomBackground {
                 icream.setLevel(store_3_Level);
                 icream.startStore();
 
+
                 money_Icream = new Thread(()->{
                     try{
                         while (true) { 
                             Thread.sleep(icream.getTime());
+
                             money += icream.getMoney_Profit();
                         }
-                    }catch(InterruptedException e){
+                    } catch (InterruptedException e) {
                     }
                 });
                 money_Icream.start();
