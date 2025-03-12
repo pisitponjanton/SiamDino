@@ -38,6 +38,7 @@ public class FeedAnimalThread extends Thread{
     
     public synchronized void running(){
         this.running = false;
+        System.out.println("+++");
         notify();
     }
     

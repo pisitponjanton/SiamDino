@@ -51,34 +51,34 @@ public abstract class MomShore extends JPanel{
     public int getProfit(){
         switch (level) {
             case 1 -> {
-                return 1;
+                return 40;
             }
             case 2 -> {
-                return 2;
+                return 60;
             }
             case 3 -> {
-                return 3;
+                return 80;
             }
             case 4 ->{
-                return 4;
+                return 100;
             }
             case 5 ->{
-                return 5;
+                return 130;
             }
             case 6 ->{
-                return 6;
+                return 170;
             }
             case 7 ->{
-                return 7;
+                return 210;
             }
             case 8 ->{
-                return 8;
+                return 260;
             }
             case 9 ->{
-                return 9;
+                return 320;
             }
             default -> {
-                return 10;
+                return 400;
             }
         }
     }
