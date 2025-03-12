@@ -28,7 +28,7 @@ public abstract class MomAnimal extends JPanel {
     private AnimationThread animationThread;
     private FeedAnimalThread feedAnimalThread;
 
-    public MomAnimal(String namePath, int moveX, int moveY,int movemaxX) {
+    public MomAnimal(String namePath, int moveX, int moveY, int movemaxX) {
         this.namePath = namePath;
         this.moveX = moveX;
         this.moveY = moveY;
@@ -40,25 +40,29 @@ public abstract class MomAnimal extends JPanel {
         addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                moveThread.running();
-                animationThread.running();
-                feedAnimalThread.running();
+                if (moveThread.getRunning()) {
+                    moveThread.running();
+                    animationThread.running();
+                    feedAnimalThread.running();
+                }
             }
         });
         setOpaque(false);
     }
 
-    public void setEvo(int evo){
+    public void setEvo(int evo) {
         this.evo = evo;
     }
-    public int getEvo(){
+
+    public int getEvo() {
         return this.evo;
     }
 
-    public void setLevel(int level){
+    public void setLevel(int level) {
         this.level = level;
     }
-    public int getLevel(){
+
+    public int getLevel() {
         return this.level;
     }
 
@@ -75,7 +79,8 @@ public abstract class MomAnimal extends JPanel {
             ArrayList<Image> imageList = new ArrayList<>();
             for (int i = 1; i <= 6; i++) {
                 try {
-                    Image img = ImageIO.read(new File("img/Animal/" + this.namePath + "/evo"+ ev +"/Character" + i + ".png"));
+                    Image img = ImageIO
+                            .read(new File("img/Animal/" + this.namePath + "/evo" + ev + "/Character" + i + ".png"));
                     imageList.add(img);
                 } catch (IOException e) {
                 }
@@ -87,7 +92,7 @@ public abstract class MomAnimal extends JPanel {
     public void startMove() {
         moveThread = new MoveThread(this);
         animationThread = new AnimationThread(this);
-        feedAnimalThread = new FeedAnimalThread(moveThread, animationThread,this);
+        feedAnimalThread = new FeedAnimalThread(moveThread, animationThread, this);
         moveThread.start();
         animationThread.start();
         feedAnimalThread.start();
@@ -112,7 +117,7 @@ public abstract class MomAnimal extends JPanel {
         int x = getX();
         int speed = 1;
 
-        if (x >= maxMoveX+movemaxX) {
+        if (x >= maxMoveX + movemaxX) {
             this.move = 0;
         } else if (x <= maxMoveX) {
             this.move = 1;

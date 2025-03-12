@@ -53,7 +53,7 @@ public class MapMenuPanel extends MomBackground {
         jp1.setOpaque(false);
         loadMap();
 
-        sp1 = new JScrollPane(jp1, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+        sp1 = new JScrollPane(jp1, JScrollPane.VERTICAL_SCROLLBAR_NEVER, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
         sp1.setBounds(50, 150, 1250, 500);
         sp1.setOpaque(false);
         sp1.getViewport().setOpaque(false);
