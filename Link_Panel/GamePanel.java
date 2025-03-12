@@ -2,11 +2,7 @@ package Link_Panel;
 
 import AllMom.*;
 import AllTread.GameThread.*;
-import Animal_component.Browny;
-import Animal_component.FlyMeToTheMoon;
-import Animal_component.Greenny;
-import Animal_component.Reddy;
-import Animal_component.StormFly;
+import Animal_component.*;
 import Background_component.*;
 import Background_component.Cage.Cage1;
 import Background_component.Cage.Cage2;
@@ -31,7 +27,6 @@ public class GamePanel extends MomBackground {
 
     private JButton backButton;
     private Image backgroundImage;
-    private JLabel money;
     private int sum;
     private Cage1 c1;
     private Cage2 c2;
@@ -45,7 +40,7 @@ public class GamePanel extends MomBackground {
     private CheckCharacter checkCharacter;
     private ArrayList<MomCharacter> charactersList = new ArrayList<>();
 
-    private Thread addAnimalThread;
+    private Thread addAnimalThread,money_Food,money_Water,money_Icream;
 
     private Greenny greenny;
     private Browny browny;
@@ -57,14 +52,18 @@ public class GamePanel extends MomBackground {
     private Water water;
     private Icream icream;
 
+    private JLabel jlb;
+    private double  money;
+
     public GamePanel(CardLayout cardLayout, JPanel mainPanel) {
         super("bggame");
 
+        jlb = new JLabel(money+" bath");
         backgroundImage = new ImageIcon("test.jpeg").getImage();
         backButton = new JButton("Back Game");
 
         setLayout(null);
-        backButton.setLocation(0, 0);
+        backButton.setLocation(600, 300);
         backButton.setSize(100, 100);
         backButton.setToolTipText("Back");
         backButton.addActionListener(_ -> {
@@ -72,7 +71,9 @@ public class GamePanel extends MomBackground {
             this.stop_Game();
             cardLayout.show(mainPanel, "MenuPanel");
         });
-
+        jlb.setLocation(500, 400);
+        jlb.setSize(100,100);
+        add(jlb);
         add(backButton);
 
         TestManu t = new TestManu();
@@ -87,14 +88,18 @@ public class GamePanel extends MomBackground {
             animal_2.put("Level", 1);
             animal_3.put("Level", 1);
             animal_3.put("Evo", 2);
-            animal_1.put("Evo", 2);
+            animal_1.put("Evo", 1);
             animal_4.put("Level", 1);
             animal_4.put("Evo", 2);
+            store_1.put("Level", 1);
+            store_2.put("Level", 1);
             store_3.put("Level", 1);
-            store_1.put("Evo", 2);
+            store_1.put("Evo", 1);
+            store_2.put("Evo", 1);
+            store_3.put("Evo", 1);
             cage[2] = 2;
             animal_5.put("Level", 1);
-            animal_5.put("Evo", 1);
+            animal_5.put("Evo", 0);
         });
 
         // add(t);
@@ -106,12 +111,14 @@ public class GamePanel extends MomBackground {
     public void start_Game(DataUser dataUser, int index) {
         this.dataUser = dataUser;
         dataMap = dataUser.getDataUser().get(index);
+        money = dataMap.getMoney();
         addAnimalThread = new Thread(() -> {
             try {
                 while (true) {
                     loadAnimal();
                     loadStore();
                     loadCage();
+                    jlb.setText(money+" bath");
                     Thread.sleep(10);
                 }
             } catch (InterruptedException e) {
@@ -128,6 +135,7 @@ public class GamePanel extends MomBackground {
     }
 
     public void stop_Game() {
+        dataMap.setMoney((int) money);
         new DataBase(dataUser);
         randomCharacterThread.interrupt();
         cleanerCharacterThread.interrupt();
@@ -341,13 +349,10 @@ public class GamePanel extends MomBackground {
         store_3 = (HashMap<String, Object>) dataMap.getStore().get("Store_3");
         int store_1_Level = (int) store_1.get("Level");
         int store_1_Evo = (int) store_1.get("Evo");
-        int store_1_Profit = (int) store_1.get("Profit");
         int store_2_Level = (int) store_2.get("Level");
         int store_2_Evo = (int) store_2.get("Evo");
-        int store_2_Profit = (int) store_2.get("Profit");
         int store_3_Level = (int) store_3.get("Level");
         int store_3_Evo = (int) store_3.get("Evo");
-        int store_3_Profit = (int) store_3.get("Profit");
 
         if (store_1_Level > 0) {
             if (food == null) {
@@ -356,11 +361,23 @@ public class GamePanel extends MomBackground {
                 setComponentZOrder(food, 0);
                 food.setEvo(store_1_Evo);
                 food.setLevel(store_1_Level);
-                food.setProfit(store_1_Profit);
+                food.startStore();
+
+                money_Food = new Thread(()->{
+                    try{
+                        while (true) { 
+                            Thread.sleep(2000);
+                            money += food.getMoney_Profit();
+                        }
+                    }catch(InterruptedException e){
+                    }
+                });
+                money_Food.start();
+
             }
             food.setEvo(store_1_Evo);
             food.setLevel(store_1_Level);
-            food.setProfit(store_1_Profit);
+
         }
 
         if (store_2_Level > 0) {
@@ -370,11 +387,21 @@ public class GamePanel extends MomBackground {
                 setComponentZOrder(water, 0);
                 water.setEvo(store_2_Evo);
                 water.setLevel(store_2_Level);
-                water.setProfit(store_2_Profit);
+                water.startStore();
+
+                money_Water = new Thread(()->{
+                    try{
+                        while (true) { 
+                            Thread.sleep(2000);
+                            money += water.getMoney_Profit();
+                        }
+                    }catch(InterruptedException e){
+                    }
+                });
+                money_Water.start();
             }
             water.setEvo(store_2_Evo);
             water.setLevel(store_2_Level);
-            water.setProfit(store_2_Profit);
         }
 
         if (store_3_Level > 0) {
@@ -384,26 +411,42 @@ public class GamePanel extends MomBackground {
                 setComponentZOrder(icream, 0);
                 icream.setEvo(store_3_Evo);
                 icream.setLevel(store_3_Level);
-                icream.setProfit(store_3_Profit);
+                icream.startStore();
+
+                money_Icream = new Thread(()->{
+                    try{
+                        while (true) { 
+                            Thread.sleep(2000);
+                            money += icream.getMoney_Profit();
+                        }
+                    }catch(InterruptedException e){
+                    }
+                });
+                money_Icream.start();
             }
             icream.setEvo(store_3_Evo);
             icream.setLevel(store_3_Level);
-            icream.setProfit(store_3_Profit);
         }
     }
 
     private void saveStore(){
         if(food != null){
+            money_Food.interrupt();
+            food.stopStore();
             remove(food);
             food = null;
         }
 
         if(water != null){
+            money_Water.interrupt();
+            water.stopStore();
             remove(water);
             water = null;
         }
 
         if(icream != null){
+            money_Icream.interrupt();
+            icream.stopStore();
             remove(icream);
             icream = null;
         }

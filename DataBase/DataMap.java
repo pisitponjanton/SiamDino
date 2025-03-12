@@ -40,7 +40,6 @@ public class DataMap  implements Serializable{
             HashMap<String, Integer> store_new = new HashMap<>();
             store_new.put("Level", 0);
             store_new.put("Evo", 0);
-            store_new.put("Profit", 150);
             store.put(str, store_new);
         }
     }

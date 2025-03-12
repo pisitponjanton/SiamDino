@@ -10,7 +10,7 @@ public class Main {
     private CardLayout cardLayout;
 
     public Main() {
-        frame = new JFrame("Game Launcher");
+        frame = new JFrame("Siam Dino");
         cardLayout = new CardLayout();
         mainPanel = new JPanel(cardLayout);
 

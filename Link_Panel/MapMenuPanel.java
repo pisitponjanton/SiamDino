@@ -50,10 +50,14 @@ public class MapMenuPanel extends MomBackground {
 
         jp1 = new JPanel();
         jp1.setLayout(new BoxLayout(jp1, BoxLayout.Y_AXIS));
+        jp1.setOpaque(false);
         loadMap();
 
         sp1 = new JScrollPane(jp1, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-        sp1.setBounds(50, 150, 1250, 400);
+        sp1.setBounds(50, 150, 1250, 500);
+        sp1.setOpaque(false);
+        sp1.getViewport().setOpaque(false);
+        sp1.setBorder(null);
         add(sp1);
         add(jp2);
         add(tfName);
