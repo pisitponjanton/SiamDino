@@ -100,7 +100,7 @@ public class GamePanel extends MomBackground {
             animal_5.put("Evo", 0);
         });
 
-        StatusBar statusBar = new StatusBar();
+        StatusBar statusBar = new StatusBar("NULL",1,money,1);
         add(statusBar);
         setComponentZOrder(statusBar, 0);
 
