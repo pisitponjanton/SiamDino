@@ -1,16 +1,7 @@
 package Link_Panel;
 
 import AllMom.*;
-import AllShop.BrownyShop;
-import AllShop.DodoShop;
-import AllShop.FlyMeToTheMoonShop;
-import AllShop.GreenyShop;
-import AllShop.IcecreamShop;
-import AllShop.RapterShop;
-import AllShop.ReddyShop;
-import AllShop.RestaurantShop;
-import AllShop.StormFlyShop;
-import AllShop.WaterShop;
+import AllShop.*;
 import AllTread.GameThread.*;
 import Animal_component.*;
 import Background_component.*;
@@ -22,7 +13,8 @@ import Background_component.Cage.Cage5;
 import Background_component.Cage.Cage6;
 import Background_component.Cage.Cage7;
 import Background_component.Store.*;
-import Button_component.Start;
+import Button_component.ButtonMenu;
+import Button_component.ButtonShop;
 import DataBase.*;
 import java.awt.*;
 import java.util.*;
@@ -35,7 +27,6 @@ public class GamePanel extends MomBackground {
     private Integer[] cage;
     private HashMap<String, Object> store_1, store_2, store_3;
 
-    private JButton backButton;
     private int sum;
     private Cage1 c1;
     private Cage2 c2;
@@ -89,6 +80,10 @@ public class GamePanel extends MomBackground {
 
     private MapMenuPanel mapMenuPanel;
     private int exp;
+    private int countAnimal;
+
+    private ButtonMenu buttonMenu;
+    private ButtonShop buttonShop;
 
     public GamePanel(CardLayout cardLayout, JPanel mainPanel) {
         super("bggame");
@@ -212,24 +207,20 @@ public class GamePanel extends MomBackground {
         sc.setVisible(false);
         add(sc);
 
-      
-        backButton = new JButton("Back Game");
-
+        buttonMenu = new ButtonMenu();
         setLayout(null);
-        backButton.setLocation(600, 300);
-        backButton.setSize(100, 100);
-        backButton.setToolTipText("Back");
-        backButton.addActionListener(_ -> {
+        buttonMenu.setLocation(1230, 80);
+        buttonMenu.setToolTipText("Back");
+        buttonMenu.addActionListener(_ -> {
             randomCharacterThread.cleanerList();
             this.stop_Game();
             cardLayout.show(mainPanel, "MapMenuPanel");
         });
-        add(backButton);
+        add(buttonMenu);
 
-        Start s = new Start();
-        s.setLocation(1150, 0);
-        s.addActionListener(_ -> {
-            setComponentZOrder(sc, 0);
+        buttonShop = new ButtonShop();
+        buttonShop.setLocation(1230, 0);
+        buttonShop.addActionListener(_ -> {
             sc.setVisible(!sc.isVisible());
         });
 
@@ -238,7 +229,7 @@ public class GamePanel extends MomBackground {
         setComponentZOrder(statusBar, 0);
 
         // add(t);
-        add(s);
+        add(buttonShop);
         allCage_Add();
 
     }
@@ -253,11 +244,9 @@ public class GamePanel extends MomBackground {
         name = dataMap.getName();
         exp = dataMap.getExp();
 
-
         randomCharacterThread = new RandomCharacterThread(this, charactersList);
         cleanerCharacterThread = new CleanerCharacterThraed(this, true, charactersList);
         checkCharacter = new CheckCharacter(randomCharacterThread, charactersList);
-        checkCharacter.setMax_Character(dataMap.getMax_Character());
         addAnimalThread = new Thread(() -> {
             try {
                 while (true) {
@@ -269,9 +258,14 @@ public class GamePanel extends MomBackground {
                     statusBar.setMoney(money);
                     statusBar.setLevel(level);
                     statusBar.setExp(exp);
+                    setComponentZOrder(statusBar, 0);
+                    setComponentZOrder(sc, 0);
+                    setComponentZOrder(buttonShop, 0);
+                    setComponentZOrder(buttonMenu, 0);
                     randomCharacterThread.setLevel(level);
                     // money+= randomCharacterThread.getMoney();
                     statusBar.setName(name);
+                    checkCharacter.setMax_Character(dataMap.getMax_Character()*countAnimal);
                     Thread.sleep(10);
                 }
             } catch (InterruptedException e) {
@@ -307,6 +301,8 @@ public class GamePanel extends MomBackground {
         saveStore();
         mapMenuPanel.loadMap();
         System.out.println("GameStop");
+        countAnimal = 0;
+        sc.setVisible(false);
     }
 
     private void allCage_Add() {
@@ -380,6 +376,7 @@ public class GamePanel extends MomBackground {
                 greenny.setEvo(evo_1);
                 greenny.setLevel(level_1);
                 greenny.startMove();
+                ++countAnimal;
             }
             greenny.setToolTipText("Level: " + greenny.getLevel());
             greenny.setEvo(evo_1);
@@ -396,6 +393,7 @@ public class GamePanel extends MomBackground {
                 browny.setEvo(evo_2);
                 browny.setLevel(level_2);
                 browny.startMove();
+                ++countAnimal;
             }
             browny.setToolTipText("Level: "+browny.getLevel());
             browny.setEvo(evo_2);
@@ -412,6 +410,7 @@ public class GamePanel extends MomBackground {
                 stormFly.setEvo(evo_3);
                 stormFly.setLevel(level_3);
                 stormFly.startMove();
+                ++countAnimal;
             }
             stormFly.setToolTipText("Level: "+stormFly.getLevel());
             stormFly.setEvo(evo_3);
@@ -428,6 +427,7 @@ public class GamePanel extends MomBackground {
                 reddy.setEvo(evo_4);
                 reddy.setLevel(level_4);
                 reddy.startMove();
+                ++countAnimal;
             }
             reddy.setToolTipText("Level: "+reddy.getLevel());
             reddy.setEvo(evo_4);
@@ -444,6 +444,7 @@ public class GamePanel extends MomBackground {
                 flyMeToTheMoon.setEvo(evo_5);
                 flyMeToTheMoon.setLevel(level_5);
                 flyMeToTheMoon.startMove();
+                ++countAnimal;
             }
             flyMeToTheMoon.setToolTipText("Level: "+flyMeToTheMoon.getLevel());
             flyMeToTheMoon.setEvo(evo_5);
@@ -460,6 +461,7 @@ public class GamePanel extends MomBackground {
                 rapter.setEvo(evo_6);
                 rapter.setLevel(level_6);
                 rapter.startMove();
+                ++countAnimal;
             }
             rapter.setToolTipText("Level: "+rapter.getLevel());
             rapter.setEvo(evo_6);
@@ -476,6 +478,7 @@ public class GamePanel extends MomBackground {
                 dodo.setEvo(evo_7);
                 dodo.setLevel(level_7);
                 dodo.startMove();
+                ++countAnimal;
             }
             dodo.setToolTipText("Level: "+dodo.getLevel());
             dodo.setEvo(evo_7);

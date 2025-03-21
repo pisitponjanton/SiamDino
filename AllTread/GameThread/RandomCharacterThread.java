@@ -68,6 +68,7 @@ public class RandomCharacterThread extends Thread {
             case 5 -> money = 199;
             case 6 -> money = 249;
             case 7 -> money = 299;
+            default -> money = 399;
         }
     }
 

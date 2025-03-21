@@ -2,8 +2,8 @@ package Link_Panel;
 
 import AllMom.MomBackground;
 import Background_component.NameText;
+import Button_component.ButtonNew;
 import Button_component.Map_Button;
-import Button_component.New;
 import DataBase.*;
 import java.awt.*;
 import javax.swing.*;
@@ -13,7 +13,7 @@ public class MapMenuPanel extends MomBackground {
     private DataUser dataUser;
     private JScrollPane sp1;
     private JPanel jp1, jp2, mainPanel;
-    private New newButton;
+    private ButtonNew newButton;
     private CardLayout cardLayout;
     private GamePanel g;
     private int i_num;
@@ -30,7 +30,8 @@ public class MapMenuPanel extends MomBackground {
         dataUser = dataBase.getDataUser();
 
         jp2 = new JPanel();
-        jp2.setLocation(0, 700);
+        jp2.setLayout(null);
+        jp2.setLocation(0, 685);
         jp2.setOpaque(false);
         jp2.setSize(1350, 200);
 
@@ -38,7 +39,8 @@ public class MapMenuPanel extends MomBackground {
         add(nameText);
         setComponentZOrder(nameText, 0);
 
-        newButton = new New();
+        newButton = new ButtonNew();
+        newButton.setLocation(620, 0);
         newButton.addActionListener(_ -> {
             if (nameText.isVisible()) {
                 if (!nameText.getName().equals("")) {
