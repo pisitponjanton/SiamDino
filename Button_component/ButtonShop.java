@@ -5,7 +5,7 @@ import java.awt.event.*;
 
 public class ButtonShop extends MomButton implements MouseListener {
     public ButtonShop() {
-        super("Allshop/buttonshop/2", 120, 72);
+        super("Allshop/buttonshop/1", 120, 72);
         addMouseListener(this);
     }
 
@@ -21,11 +21,11 @@ public class ButtonShop extends MomButton implements MouseListener {
     
     @Override
     public void mouseEntered(MouseEvent e) {
-        super.setNamePath("Allshop/buttonshop/1");
+        super.setNamePath("Allshop/buttonshop/2");
     }
 
     @Override
     public void mouseExited(MouseEvent e) {
-        super.setNamePath("Allshop/buttonshop/2");
+        super.setNamePath("Allshop/buttonshop/1");
     }
 }
