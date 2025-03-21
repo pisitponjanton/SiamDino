@@ -1,7 +1,9 @@
 package Link_Panel;
 
 import AllMom.MomBackground;
+import Background_component.NameText;
 import Button_component.Map_Button;
+import Button_component.New;
 import DataBase.*;
 import java.awt.*;
 import javax.swing.*;
@@ -11,11 +13,12 @@ public class MapMenuPanel extends MomBackground {
     private DataUser dataUser;
     private JScrollPane sp1;
     private JPanel jp1, jp2, mainPanel;
-    private JButton newButton;
+    private New newButton;
     private CardLayout cardLayout;
     private GamePanel g;
-    private JTextField tfName;
     private int i_num;
+
+    private NameText nameText;
 
     public MapMenuPanel(CardLayout cardLayout, JPanel mainPanel, GamePanel g) {
         super("bg");
@@ -25,25 +28,28 @@ public class MapMenuPanel extends MomBackground {
         this.g = g;
         dataBase = new DataBase();
         dataUser = dataBase.getDataUser();
-        tfName = new JTextField();
-        tfName.setSize(200, 30);
-        tfName.setLocation(575,670);
-        tfName.setVisible(false);
 
         jp2 = new JPanel();
         jp2.setLocation(0, 700);
         jp2.setOpaque(false);
         jp2.setSize(1350, 200);
-        newButton = new JButton("NEW");
-        newButton.setPreferredSize(new Dimension(100, 50));
+
+        nameText = new NameText();
+        add(nameText);
+        setComponentZOrder(nameText, 0);
+
+        newButton = new New();
         newButton.addActionListener(_ -> {
-            tfName.setVisible(true);
-            if(!tfName.getText().equals("")){
-                dataUser.getDataUser().add(new DataMap(tfName.getText()));
-                System.out.println("AddDataMap");
-                loadMap();
-                tfName.setText("");
-                tfName.setVisible(false);
+            if (nameText.isVisible()) {
+                if (!nameText.getName().equals("")) {
+                    dataUser.getDataUser().add(new DataMap(nameText.getName()));
+                    System.out.println("AddDataMap");
+                    loadMap();
+                }
+                nameText.setVisible(false);
+                nameText.reName();
+            } else {
+                nameText.setVisible(true);
             }
         });
         jp2.add(newButton);
@@ -54,18 +60,15 @@ public class MapMenuPanel extends MomBackground {
         loadMap();
 
         sp1 = new JScrollPane(jp1, JScrollPane.VERTICAL_SCROLLBAR_NEVER, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-        sp1.setBounds(50, 150, 1250, 500);
+        sp1.setBounds(50, 150, 1250, 450);
         sp1.setOpaque(false);
         sp1.getViewport().setOpaque(false);
         sp1.setBorder(null);
         add(sp1);
         add(jp2);
-        add(tfName);
-        setComponentZOrder(tfName, 0);
-
     }
 
-    private void loadMap() {
+    public void loadMap() {
         i_num = 0;
         jp1.removeAll();
         for (DataMap m : dataUser.getDataUser()) {
@@ -73,7 +76,7 @@ public class MapMenuPanel extends MomBackground {
             Map_Button b = new Map_Button(m.getName(), m.getLevel(), m.getMoney());
             b.addActionListener(_ -> {
                 try {
-                    g.start_Game(dataUser,currentIndex);
+                    g.start_Game(dataUser, currentIndex,this);
                     cardLayout.show(mainPanel, "GamePanel");
                     System.out.println("GameStart");
                 } catch (Exception e) {

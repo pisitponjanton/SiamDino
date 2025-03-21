@@ -53,13 +53,11 @@ public class FeedAnimalThread extends Thread{
     }
 
     public int getSleep(){
-        if(m.getEvo() == 0 ){
-            return 180000;
-        }else if(m.getEvo() == 1){
-            return 120000;
-        }else{
-            return 60000;
-        }
+        return switch (m.getEvo()) {
+            case 0 -> 180000;
+            case 1 -> 120000;
+            default -> 60000;
+        };
     }
 
 }

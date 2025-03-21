@@ -1,10 +1,11 @@
 package Animal_component;
 
 import AllMom.MomAnimal;
+import Link_Panel.GamePanel;
 
 public class Reddy extends MomAnimal{
-    public Reddy(){
-        super("Reddy", 50, 550,200);
+    public Reddy(GamePanel g){
+        super("Reddy", 50, 550,200,g);
         new Thread(() -> {
             try {
                 Thread.sleep(100);

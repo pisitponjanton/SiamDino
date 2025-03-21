@@ -1,10 +1,11 @@
 package Animal_component;
 
 import AllMom.MomAnimal;
+import Link_Panel.GamePanel;
 
 public class FlyMeToTheMoon extends MomAnimal{
-    public FlyMeToTheMoon(){
-        super("FlyMeToTheMoon", 1150, 500, 60);
+    public FlyMeToTheMoon(GamePanel g){
+        super("FlyMeToTheMoon", 1150, 500, 60,g);
         new Thread(() -> {
             try {
                 Thread.sleep(100);

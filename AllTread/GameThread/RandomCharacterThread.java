@@ -14,6 +14,8 @@ public class RandomCharacterThread extends Thread {
     private ArrayList<MomCharacter> charactersList;
     private GamePanel g;
     private boolean running;
+    private double money;
+    private int level = 1;
 
     public RandomCharacterThread(GamePanel g,ArrayList<MomCharacter> charactersList) {
         this.g = g;
@@ -24,9 +26,11 @@ public class RandomCharacterThread extends Thread {
     public void run() {
         try {
             while (true) {
+                Thread.sleep(5000);
                 setRunning();
+                setMoney();
+                g.setMoney(g.getMoney()+money);
                 startRandomCharacterThread();
-                Thread.sleep(3500);
             }
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
@@ -40,6 +44,30 @@ public class RandomCharacterThread extends Thread {
             }
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
+        }
+    }
+
+    public void setLevel(int level){
+        this.level = level;
+    }
+
+    public int getLevel(){
+        return this.level;
+    }
+
+    public double getMoney(){
+        return this.money;
+    }
+
+    private void setMoney(){
+        switch (level) {
+            case 1 -> money = 99;
+            case 2 -> money = 119;
+            case 3 -> money = 139;
+            case 4 -> money = 169;
+            case 5 -> money = 199;
+            case 6 -> money = 249;
+            case 7 -> money = 299;
         }
     }
 

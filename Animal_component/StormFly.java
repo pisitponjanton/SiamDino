@@ -1,10 +1,11 @@
 package Animal_component;
 
 import AllMom.MomAnimal;
+import Link_Panel.GamePanel;
 
 public class StormFly extends MomAnimal{
-    public StormFly(){
-        super("StormFly",750 ,100 ,400 );
+    public StormFly(GamePanel g){
+        super("StormFly",750 ,100 ,400 ,g);
         new Thread(() -> {
             try {
                 Thread.sleep(100);

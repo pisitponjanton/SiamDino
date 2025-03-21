@@ -3,6 +3,7 @@ package AllMom;
 import AllTread.AnimalThread.AnimationThread;
 import AllTread.AnimalThread.FeedAnimalThread;
 import AllTread.AnimalThread.MoveThread;
+import Link_Panel.GamePanel;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.File;
@@ -28,22 +29,26 @@ public abstract class MomAnimal extends JPanel {
     private AnimationThread animationThread;
     private FeedAnimalThread feedAnimalThread;
 
-    public MomAnimal(String namePath, int moveX, int moveY, int movemaxX) {
+    private GamePanel g;
+
+    public MomAnimal(String namePath, int moveX, int moveY, int movemaxX,GamePanel g) {
         this.namePath = namePath;
         this.moveX = moveX;
         this.moveY = moveY;
         this.movemaxX = movemaxX;
         this.maxMoveX = moveX;
         this.maxMoveY = moveY;
+        this.g = g;
         this.addImage();
         setCursor(new Cursor(Cursor.HAND_CURSOR));
         addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                if (moveThread.getRunning()) {
+                if (moveThread.getRunning()){
                     moveThread.running();
                     animationThread.running();
                     feedAnimalThread.running();
+                    g.setExp(g.getExp()+75);
                 }
             }
         });

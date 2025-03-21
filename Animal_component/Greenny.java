@@ -1,17 +1,18 @@
 package Animal_component;
 
 import AllMom.MomAnimal;
+import Link_Panel.GamePanel;
 
 public class Greenny extends MomAnimal {
-    public Greenny() {
-        super("Greenny", 500, 600,100);
+    public Greenny(GamePanel g) {
+        super("Greenny", 500, 600,100,g);
         new Thread(() -> {
             try {
                 Thread.sleep(100);
                 while (true) {
                     switch (getEvo()) {
-                        case 0 -> setSize(150, 66);
-                        case 1 -> setSize(100, 99);
+                        case 0 -> setSize(150, 79);
+                        case 1 -> setSize(114, 100);
                         case 2 -> setSize(86, 100);
                         default -> {
                         }

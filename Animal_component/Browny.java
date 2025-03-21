@@ -1,10 +1,11 @@
 package Animal_component;
 
 import AllMom.MomAnimal;
+import Link_Panel.GamePanel;
 
 public class Browny extends MomAnimal{
-    public Browny(){
-        super("Browny", 920, 550,50);
+    public Browny(GamePanel g){
+        super("Browny", 920, 550,50,g);
         new Thread(() -> {
             try {
                 Thread.sleep(100);
