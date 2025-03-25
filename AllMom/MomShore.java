@@ -44,6 +44,10 @@ public abstract class MomShore extends JPanel{
         this.money_profit = money_profit;
     }
 
+    public void setMoney_Profit(double money_profit){
+        setMoney_Profit((int) money_profit);
+    }
+
     public int getMoney_Profit(){
         return money_profit;
     }

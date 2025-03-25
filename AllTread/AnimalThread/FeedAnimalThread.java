@@ -1,6 +1,7 @@
 package AllTread.AnimalThread;
 
 import AllMom.MomAnimal;
+import java.util.Random;
 
 public class FeedAnimalThread extends Thread{
     private boolean running;
@@ -53,9 +54,12 @@ public class FeedAnimalThread extends Thread{
     }
 
     public int getSleep(){
-        return switch (m.getEvo()) {
+        Random random = new Random();
+        return switch (random.nextInt(5)){
             case 0 -> 180000;
             case 1 -> 120000;
+            case 2 -> 100000;
+            case 3 -> 30000;
             default -> 60000;
         };
     }

@@ -21,6 +21,7 @@ public class BrownyShop extends MomButton{
 
     }
 
+    @Override
     public void startThread(){
         thread = new Thread(()->{
             try {                
@@ -44,6 +45,7 @@ public class BrownyShop extends MomButton{
         thread.start();
     }
 
+    @Override
     public void stopThread(){
         thread.interrupt();
     }

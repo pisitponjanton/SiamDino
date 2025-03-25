@@ -6,7 +6,7 @@ import java.util.*;
 public class DataMap  implements Serializable{
     private String name;
     private int max_character = 3;
-    private double money = 300;
+    private double money = 19000;
     private int level = 1;
     private int exp = 0;
     private HashMap<String, Object> animal;

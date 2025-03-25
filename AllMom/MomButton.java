@@ -39,4 +39,6 @@ public abstract class MomButton extends JButton {
         }
         super.paintComponent(g);
     }
+    public abstract void startThread();
+    public abstract void stopThread();
 }

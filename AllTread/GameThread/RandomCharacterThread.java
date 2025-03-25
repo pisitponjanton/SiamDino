@@ -1,10 +1,7 @@
 package AllTread.GameThread;
 
 import AllMom.MomCharacter;
-import Character_component.Bank;
-import Character_component.Mario;
-import Character_component.Mrbean;
-import Character_component.Snowkuy;
+import Character_component.*;
 import Link_Panel.GamePanel;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -83,13 +80,15 @@ public class RandomCharacterThread extends Thread {
 
     public synchronized void startRandomCharacterThread() {
         Random rand = new Random();
-        int random_Character = rand.nextInt(4);
+        int random_Character = rand.nextInt(6);
         boolean random_Move = rand.nextBoolean();
         int random_Move_int = random_Move ? 0 : 1350;
         MomCharacter m = switch (random_Character) {
             case 0 -> new Mrbean(random_Move_int, 330, random_Move_int > 0 ? 1 : 0);
             case 1 -> new Snowkuy(random_Move_int, 330, random_Move_int > 0 ? 1 : 0);
             case 2 -> new Mario(random_Move_int, 330, random_Move_int > 0 ? 1 : 0);
+            case 3 -> new Chawaydagong(random_Move_int, 330, random_Move_int > 0 ? 1 : 0);
+            case 4 -> new Fuy(random_Move_int, 330, random_Move_int > 0 ? 1 : 0);
             default -> new Bank(random_Move_int, 330, random_Move_int > 0 ? 1 : 0);
         };
         System.out.println("NPC = " + (charactersList.size() + 1));
