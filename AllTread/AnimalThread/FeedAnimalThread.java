@@ -59,7 +59,7 @@ public class FeedAnimalThread extends Thread{
             case 0 -> 180000;
             case 1 -> 120000;
             case 2 -> 100000;
-            case 3 -> 30000;
+            case 3 -> 80000;
             default -> 60000;
         };
     }
