@@ -68,7 +68,7 @@ public class BrownyShop extends MomButton{
 
     private void reMoney(){
         switch (level) {
-            case 0 -> money = 1000;
+            case 0 -> money = 1200;
             case 1 -> money = 1000;
             case  2 -> money = 1720;
             case  3 -> money = 2400;
@@ -79,7 +79,7 @@ public class BrownyShop extends MomButton{
             case  8 -> money = 10000;
             case  9 -> money = 20000;
             case 10 -> money = 40000;
-            default -> money = 1000;
+            default -> money = 1200;
         }   
     }
 }

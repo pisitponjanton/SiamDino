@@ -45,6 +45,7 @@ public abstract class MomAnimal extends JPanel {
             @Override
             public void mouseClicked(MouseEvent e) {
                 if (moveThread.getRunning()){
+                    removeAll();
                     moveThread.running();
                     animationThread.running();
                     feedAnimalThread.running();

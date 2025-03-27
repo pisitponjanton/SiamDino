@@ -1,13 +1,17 @@
 package AllTread.AnimalThread;
 
 import AllMom.MomAnimal;
-import java.util.Random;
+import java.awt.*;
+import java.util.*;
+import javax.swing.*;
 
 public class FeedAnimalThread extends Thread{
     private boolean running;
     private MoveThread moveThread;
     private AnimationThread animationThread;
     private MomAnimal m;
+    private JLabel label;
+    private Thread aThread;
 
     public FeedAnimalThread(MoveThread moveThread,AnimationThread animationThread,MomAnimal m){
         this.moveThread = moveThread;
@@ -20,6 +24,7 @@ public class FeedAnimalThread extends Thread{
             while (true) {
                 Thread.sleep(getSleep());
                 stopAll();
+                showMessage();
                 setRunning();
             }
         } catch (InterruptedException e) {
@@ -62,6 +67,18 @@ public class FeedAnimalThread extends Thread{
             case 3 -> 80000;
             default -> 60000;
         };
+    }
+
+    public void showMessage(){
+        label = new JLabel("Hungry");
+        label.setOpaque(true);
+        label.setForeground(Color.WHITE);
+        label.setBackground(Color.BLACK);
+        label.setToolTipText("Click ME");
+        label.setBounds(50, 50, 30, 30);
+        m.add(label);
+        m.revalidate();
+        m.repaint();
     }
 
 }
