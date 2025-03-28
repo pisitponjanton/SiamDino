@@ -4,9 +4,10 @@ import AllMom.MomAnimal;
 import Link_Panel.GamePanel;
 
 public class Rapter extends MomAnimal {
+    private Thread thread;
     public Rapter(GamePanel g) {
         super("Rapter", 380, 100,120,g);
-        new Thread(() -> {
+        thread  = new Thread(() -> {
             try {
                 Thread.sleep(100);
                 while (true) {
@@ -20,6 +21,10 @@ public class Rapter extends MomAnimal {
                 }
             } catch (InterruptedException e) {
             }
-        }).start();
+        });
+        thread.start();
+    }
+    public void stopThread(){
+        this.thread.interrupt();
     }
 }

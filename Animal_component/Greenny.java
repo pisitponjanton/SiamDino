@@ -4,9 +4,10 @@ import AllMom.MomAnimal;
 import Link_Panel.GamePanel;
 
 public class Greenny extends MomAnimal {
+    private Thread thread;
     public Greenny(GamePanel g) {
         super("Greenny", 500, 600,100,g);
-        new Thread(() -> {
+        thread = new Thread(() -> {
             try {
                 Thread.sleep(100);
                 while (true) {
@@ -20,6 +21,10 @@ public class Greenny extends MomAnimal {
                 }
             } catch (InterruptedException e) {
             }
-        }).start();
+        });
+        thread.start();
+    }
+    public void stopThread(){
+        this.thread.interrupt();
     }
 }

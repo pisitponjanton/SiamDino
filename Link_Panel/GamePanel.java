@@ -303,6 +303,17 @@ public class GamePanel extends MomBackground {
         System.out.println("GameStop");
         countAnimal = 0;
         sc.setVisible(false);
+
+        greenyShop.stopThread();
+        brownyShop.stopThread();
+        flyMeToTheMoonShop.stopThread();
+        reddyShop.stopThread();
+        stormFlyShop.stopThread();
+        rapterShop.stopThread();
+        dodoShop.stopThread();
+        restaurantShop.stopThread();
+        waterShop.stopThread();
+        icecreamShop.stopThread();
     }
 
     private void allCage_Add() {
@@ -503,6 +514,7 @@ public class GamePanel extends MomBackground {
             c1.setVisible(false);
             greenny.stopMove();
             remove(greenny);
+            greenny.stopThread();
             greenny = null;
             greenyShop.stopThread();
         }
@@ -510,6 +522,7 @@ public class GamePanel extends MomBackground {
             c2.setVisible(false);
             browny.stopMove();
             remove(browny);
+            browny.stopThread();
             browny = null;
             brownyShop.stopThread();
         }
@@ -517,6 +530,7 @@ public class GamePanel extends MomBackground {
             c6.setVisible(false);
             stormFly.stopMove();
             remove(stormFly);
+            stormFly.stopThread();
             stormFly = null;
             stormFlyShop.stopThread();
         }
@@ -524,6 +538,7 @@ public class GamePanel extends MomBackground {
             c3.setVisible(false);
             reddy.stopMove();
             remove(reddy);
+            reddy.stopThread();
             reddy = null;
             reddyShop.stopThread();
         }
@@ -532,6 +547,7 @@ public class GamePanel extends MomBackground {
             c5.setVisible(false);
             flyMeToTheMoon.stopMove();
             remove(flyMeToTheMoon);
+            flyMeToTheMoon.stopThread();
             flyMeToTheMoon = null;
             flyMeToTheMoonShop.stopThread();
         }
@@ -541,6 +557,7 @@ public class GamePanel extends MomBackground {
             c7.setVisible(false);
             rapter.stopMove();
             remove(rapter);
+            rapter.stopThread();
             rapter = null;
             rapterShop.stopThread();
         }
@@ -549,6 +566,7 @@ public class GamePanel extends MomBackground {
             c4.setVisible(false);
             dodo.stopMove();
             remove(dodo);
+            dodo.stopThread();
             dodo = null;
             dodoShop.stopThread();
         }

@@ -4,9 +4,10 @@ import AllMom.MomAnimal;
 import Link_Panel.GamePanel;
 
 public class StormFly extends MomAnimal{
+    private Thread thread;
     public StormFly(GamePanel g){
         super("StormFly",750 ,100 ,400 ,g);
-        new Thread(() -> {
+        thread = new Thread(() -> {
             try {
                 Thread.sleep(100);
                 while (true) {
@@ -20,6 +21,10 @@ public class StormFly extends MomAnimal{
                 }
             } catch (InterruptedException e) {
             }
-        }).start();
+        });
+        thread.start();
+    }
+    public void stopThread(){
+        this.thread.interrupt();
     }
 }

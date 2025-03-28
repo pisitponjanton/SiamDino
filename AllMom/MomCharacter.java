@@ -116,6 +116,11 @@ public abstract class MomCharacter extends JPanel implements Move {
         moveThread.start();
     }
 
+    public void stopMove(){
+        animationThread.interrupt();
+        moveThread.interrupt();
+    }
+
     public void howMove() {
         currentFrame = switch (this.move) {
             case 0 -> (currentFrame == 0) ? 7 : 0;

@@ -21,7 +21,7 @@ public class CleanerCharacterThraed extends Thread {
         try {
             while (true) {
                 cleanerList_inGame();
-                Thread.sleep(1000);
+                Thread.sleep(100);
             }
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
@@ -37,6 +37,7 @@ public class CleanerCharacterThraed extends Thread {
         while (iterator.hasNext()) {
             MomCharacter m = iterator.next();
             if (m.getX() < -1 || m.getX() >= 1360) {
+                m.stopMove();
                 g.remove(m);
                 iterator.remove();
                 g.repaint();

@@ -102,6 +102,7 @@ public class RandomCharacterThread extends Thread {
         Iterator<MomCharacter> iterator = charactersList.iterator();
         while (iterator.hasNext()) {
             MomCharacter m = iterator.next();
+            m.stopMove();
             g.remove(m);
             iterator.remove();
             g.repaint();
