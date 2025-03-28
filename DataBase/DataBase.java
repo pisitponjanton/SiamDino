@@ -3,7 +3,7 @@ package DataBase;
 import java.io.*;
 
 public class DataBase {
-    private DataUser dataUser;
+    private static DataUser dataUser;
 
     public DataBase(){
         loadData();
@@ -12,8 +12,8 @@ public class DataBase {
         }
     }
 
-    public DataBase(DataUser dataUser){
-        this.dataUser = dataUser;
+    public static void saveGame(DataUser dataUser){
+        DataBase.dataUser = dataUser;
         saveData();
     }
 
@@ -32,7 +32,7 @@ public class DataBase {
         }
     }
 
-    private void saveData() {
+    private static void saveData() {
         try (FileOutputStream output = new FileOutputStream("DataBase/datauser.dat");
                 ObjectOutputStream objoutput = new ObjectOutputStream(output);) {
                 objoutput.writeObject(dataUser);

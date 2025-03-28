@@ -292,7 +292,7 @@ public class GamePanel extends MomBackground {
         dataMap.setMoney((int) money);
         dataMap.setExp(exp);
         dataMap.setLevel(level);
-        new DataBase(dataUser);
+        DataBase.saveGame(dataUser);
         randomCharacterThread.interrupt();
         cleanerCharacterThread.interrupt();
         checkCharacter.interrupt();

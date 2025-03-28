@@ -3,6 +3,7 @@ package Link_Panel;
 import AllMom.MomBackground;
 import Background_component.NameGame;
 import Background_component.NameText;
+import Button_component.ButtonBack;
 import Button_component.ButtonNew;
 import Button_component.Map_Button;
 import DataBase.*;
@@ -18,6 +19,7 @@ public class MapMenuPanel extends MomBackground {
     private CardLayout cardLayout;
     private GamePanel g;
     private int i_num,i;
+    private ButtonBack buttonBack;
 
     private NameText nameText;
     private NameGame nameGame;
@@ -54,6 +56,12 @@ public class MapMenuPanel extends MomBackground {
         setComponentZOrder(nameText, 0);
 
         nameGame = new NameGame();
+        
+        buttonBack = new ButtonBack();
+        buttonBack.setLocation(10,710);
+        buttonBack.addActionListener(_->{
+            cardLayout.show(mainPanel, "MenuPanel");
+        });
 
         newButton = new ButtonNew();
         newButton.setLocation(620, 0);
@@ -71,18 +79,19 @@ public class MapMenuPanel extends MomBackground {
             }
         });
         jp2.add(newButton);
-
+        
         jp1 = new JPanel();
         jp1.setLayout(new BoxLayout(jp1, BoxLayout.Y_AXIS));
         jp1.setOpaque(false);
-
+        
         loadMap();
-
+        
         sp1 = new JScrollPane(jp1, JScrollPane.VERTICAL_SCROLLBAR_NEVER, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
         sp1.setBounds(50, 150, 1250, 450);
         sp1.setOpaque(false);
         sp1.getViewport().setOpaque(false);
         sp1.setBorder(null);
+        add(buttonBack);
         add(sp1);
         add(jp2);
 
@@ -120,5 +129,6 @@ public class MapMenuPanel extends MomBackground {
             i_num++;
         }
         repaint();
+        DataBase.saveGame(dataUser);
     }
 }
