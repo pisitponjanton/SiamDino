@@ -10,9 +10,21 @@ import javax.swing.*;
 public class MenuPanel extends MomBackground {
     private Start startButton;
     private NameGame namegame;
+    private int i;
 
     public MenuPanel(CardLayout cardLayout, JPanel mainPanel) {
-        super("bg");
+        super("bgset/0");
+
+        new Thread(()->{
+            try {
+                while (true) { 
+                    Thread.sleep(300);
+                    super.setNamePath("bgset/"+(i%10));
+                    i++;
+                }
+            } catch (InterruptedException e) {
+            }
+        }).start();
 
         setLayout(null);
 

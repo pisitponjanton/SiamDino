@@ -13,6 +13,12 @@ public abstract class MomBackground extends JPanel {
         setOpaque(false);
     }
 
+    public void setNamePath(String namePath){
+        this.namePath = namePath;
+        this.drawBackgroundImage();
+        repaint();
+    }
+
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);

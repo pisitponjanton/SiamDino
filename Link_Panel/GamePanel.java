@@ -577,10 +577,18 @@ public class GamePanel extends MomBackground {
 
                 money_Food = new Thread(()->{
                     try{
-                        while (true) { 
+                        while (true) {
                             Thread.sleep(food.getTime());
                             money += food.getMoney_Profit();
                             exp += 30;
+                            JLabel text = new JLabel("+ "+food.getMoney_Profit(),JLabel.CENTER);
+                            text.setOpaque(true);
+                            text.setForeground(Color.WHITE);
+                            text.setBackground(Color.BLACK);
+                            text.setBounds(50, 50, 30, 30);
+                            food.add(text);
+                            Thread.sleep(1500);
+                            food.removeAll();
                         }
                     } catch (InterruptedException e) {
                     }
@@ -607,6 +615,14 @@ public class GamePanel extends MomBackground {
                             Thread.sleep(water.getTime());
                             money += water.getMoney_Profit();
                             exp += 30;
+                            JLabel text = new JLabel("+ "+water.getMoney_Profit(),JLabel.CENTER);
+                            text.setOpaque(true);
+                            text.setForeground(Color.WHITE);
+                            text.setBackground(Color.BLACK);
+                            text.setBounds(50, 50, 30, 30);
+                            water.add(text);
+                            Thread.sleep(1500);
+                            water.removeAll();
                         }
                     } catch (InterruptedException e) {
                     }
@@ -634,6 +650,14 @@ public class GamePanel extends MomBackground {
                             Thread.sleep(icream.getTime());
                             money += icream.getMoney_Profit();
                             exp += 30;
+                            JLabel text = new JLabel("+ "+icream.getMoney_Profit(),JLabel.CENTER);
+                            text.setOpaque(true);
+                            text.setForeground(Color.WHITE);
+                            text.setBackground(Color.BLACK);
+                            text.setBounds(50, 50, 30, 30);
+                            icream.add(text);
+                            Thread.sleep(1500);
+                            icream.removeAll();
                         }
                     } catch (InterruptedException e) {
                     }
@@ -679,65 +703,86 @@ public class GamePanel extends MomBackground {
     private void evoEvo(){
         if(level_1<4){
             animal_1.put("Evo", 0);
+            cage[0] = 0;
         }else if(level_1>=4 && level_1<7){
             animal_1.put("Evo", 1);
+            cage[0] = 1;
         }
         else{
             animal_1.put("Evo", 2);
+            cage[0] = 2;
         }
 
         if(level_2<4){
             animal_2.put("Evo", 0);
+            cage[1] = 0;
         }else if(level_2>=4 && level_2<7){
             animal_2.put("Evo", 1);
+            cage[1] = 1;
         }
         else{
             animal_2.put("Evo", 2);
+            cage[1] = 2;
         }
 
         if(level_3<4){
             animal_3.put("Evo", 0);
+            cage[5] = 0;
         }else if(level_3>=4 && level_3<7){
             animal_3.put("Evo", 1);
+            cage[5] = 1;
         }
         else{
             animal_3.put("Evo", 2);
+            cage[5] = 2;
         }
 
         if(level_4<4){
             animal_4.put("Evo", 0);
+            cage[2] = 0;
         }else if(level_4>=4 && level_4<7){
             animal_4.put("Evo", 1);
+            cage[2] = 1;
         }
         else{
             animal_4.put("Evo", 2);
+            cage[2] = 2;
         }
 
         if(level_5<4){
             animal_5.put("Evo", 0);
+            cage[4] = 0;
         }else if(level_5>=4 && level_5<7){
             animal_5.put("Evo", 1);
+            cage[4] = 1;
         }
         else{
             animal_5.put("Evo", 2);
+            cage[4] = 2;
         }
 
         if(level_6<4){
             animal_6.put("Evo", 0);
+            cage[6] = 0;
         }else if(level_6>=4 && level_6<7){
             animal_6.put("Evo", 1);
+            cage[6] = 1;
         }
         else{
             animal_6.put("Evo", 2);
+            cage[6] = 2;
         }
 
         if(level_7<4){
             animal_7.put("Evo", 0);
+            cage[3] = 0;
         }else if(level_7>=4 && level_7<7){
             animal_7.put("Evo", 1);
+            cage[3] = 1;
         }
         else{
             animal_7.put("Evo", 2);
+            cage[3] = 2;
         }
 
         if(store_1_Level<4){

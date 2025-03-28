@@ -17,13 +17,25 @@ public class MapMenuPanel extends MomBackground {
     private ButtonNew newButton;
     private CardLayout cardLayout;
     private GamePanel g;
-    private int i_num;
+    private int i_num,i;
 
     private NameText nameText;
     private NameGame nameGame;
 
     public MapMenuPanel(CardLayout cardLayout, JPanel mainPanel, GamePanel g) {
-        super("bg");
+        super("bgset/0");
+
+        new Thread(()->{
+            try {
+                while (true) { 
+                    Thread.sleep(300);
+                    super.setNamePath("bgset/"+(i%10));
+                    i++;
+                }
+            } catch (InterruptedException e) {
+            }
+        }).start();
+
         setLayout(null);
         this.cardLayout = cardLayout;
         this.mainPanel = mainPanel;
@@ -97,6 +109,11 @@ public class MapMenuPanel extends MomBackground {
                 } catch (Exception e) {
                     System.out.println(e);
                 }
+            });
+            b.getDelete().addActionListener(_->{
+                dataUser.getDataUser().remove(currentIndex);
+                loadMap();
+                System.out.println("DeleteMap "+currentIndex);
             });
             jp1.add(b);
             jp1.add(Box.createVerticalStrut(10));
