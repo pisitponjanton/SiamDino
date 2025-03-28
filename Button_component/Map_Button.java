@@ -36,4 +36,8 @@ public class Map_Button extends MomButton {
     public ButtonDelete getDelete(){
         return this.delete;
     }
+    @Override
+    public void startThread(){}
+    @Override
+    public void stopThread(){}
 }

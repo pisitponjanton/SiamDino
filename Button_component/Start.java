@@ -39,4 +39,8 @@ public class Start extends MomButton {
             }
         });
     }
+    @Override
+    public void startThread(){}
+    @Override
+    public void stopThread(){}
 }

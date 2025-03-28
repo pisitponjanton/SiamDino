@@ -10,9 +10,5 @@ public class Mrbean extends MomCharacter {
         super.startMove();
 
         setLayout(null);
-        // JLabel l = new JLabel("LV.1");
-        // l.setFont(new Font("Arial", Font.BOLD, 12));
-        // l.setBounds(85, 10, 100, 50);
-        // add(l);
     }
 }

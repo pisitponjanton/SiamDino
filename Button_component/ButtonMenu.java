@@ -3,6 +3,7 @@ package Button_component;
 import AllMom.MomButton;
 import java.awt.event.*;
 
+
 public class ButtonMenu extends MomButton implements MouseListener {
     public ButtonMenu() {
         super("Allshop/MenuButton/1", 126, 49);
@@ -28,4 +29,8 @@ public class ButtonMenu extends MomButton implements MouseListener {
     public void mouseExited(MouseEvent e) {
         super.setNamePath("Allshop/MenuButton/1");
     }
+    @Override
+    public void startThread(){}
+    @Override
+    public void stopThread(){}
 }
