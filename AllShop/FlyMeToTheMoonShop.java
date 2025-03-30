@@ -4,38 +4,36 @@ import AllMom.MomButton;
 import java.awt.*;
 import javax.swing.*;
 
-public class FlyMeToTheMoonShop extends MomButton{
+public class FlyMeToTheMoonShop extends MomButton implements ShopStatus {
     private int level;
     private int money;
     private JLabel moneyJLabel;
     private Thread thread;
 
-    public FlyMeToTheMoonShop(){
+    public FlyMeToTheMoonShop() {
         super("AllShop/FlyMeToTheMoon/1", 184, 96);
         setLayout(null);
         reMoney();
-        moneyJLabel = new JLabel(money+"");
+        moneyJLabel = new JLabel(money + "");
         moneyJLabel.setBounds(130, 92, 80, 20);
         moneyJLabel.setFont(new Font("Arial", Font.BOLD, 20));
         add(moneyJLabel);
 
     }
-    
-    public void startThread(){
-        thread = new Thread(()->{
-            try {                
+
+    public void startThread() {
+        thread = new Thread(() -> {
+            try {
                 while (true) {
-                    if (level<4) {
+                    if (level < 4) {
                         super.setNamePath("AllShop/FlyMeToTheMoon/1");
-                    }
-                    else if(level>=4 && level<7){
+                    } else if (level >= 4 && level < 7) {
                         super.setNamePath("AllShop/FlyMeToTheMoon/2");
-                    }
-                    else if (level>=7) {
+                    } else if (level >= 7) {
                         super.setNamePath("AllShop/FlyMeToTheMoon/3");
                     }
                     reMoney();
-                    moneyJLabel.setText(money+"");
+                    moneyJLabel.setText(money + "");
                     Thread.sleep(50);
                 }
             } catch (InterruptedException e) {
@@ -44,40 +42,45 @@ public class FlyMeToTheMoonShop extends MomButton{
         thread.start();
     }
 
-    public void stopThread(){
+    public void stopThread() {
         thread.interrupt();
     }
 
-    public void setMoney(int money){
+    public void setMoney(int money) {
         this.money = money;
     }
 
-    public int getMoney(){
+    public int getMoney() {
         return this.money;
     }
 
-    public void setLevel(int level){
+    public void setLevel(int level) {
         this.level = level;
     }
 
-    public int getLevel(){
+    public int getLevel() {
         return this.level;
     }
 
-    private void reMoney(){
+    private void reMoney() {
         switch (level) {
             case 0 -> money = 1200;
             case 1 -> money = 1000;
-            case  2 -> money = 1720;
-            case  3 -> money = 2400;
-            case  4 -> money = 3199;
-            case  5 -> money = 4000;
-            case  6 -> money = 5000;
-            case  7 -> money = 7000;
-            case  8 -> money = 10000;
-            case  9 -> money = 20000;
+            case 2 -> money = 1720;
+            case 3 -> money = 2400;
+            case 4 -> money = 3199;
+            case 5 -> money = 4000;
+            case 6 -> money = 5000;
+            case 7 -> money = 7000;
+            case 8 -> money = 10000;
+            case 9 -> money = 20000;
             case 10 -> money = 40000;
             default -> money = 1200;
-        }   
+        }
+    }
+
+    @Override
+    public String getStatus() {
+        return "Level: " + level + ", Money: " + money;
     }
 }
