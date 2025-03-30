@@ -24,8 +24,8 @@ public class BrownyShop extends MomButton{
     @Override
     public void startThread(){
         thread = new Thread(()->{
-            try {                
-                while (true) { 
+            try {
+                while (true) {
                     if (level<4) {
                         super.setNamePath("AllShop/Browny/1");
                     }
@@ -80,6 +80,6 @@ public class BrownyShop extends MomButton{
             case  9 -> money = 20000;
             case 10 -> money = 40000;
             default -> money = 1200;
-        }   
+        }
     }
 }
