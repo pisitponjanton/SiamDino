@@ -40,6 +40,7 @@ public abstract class MomShore extends JPanel{
         this.level = level;
     }
 
+    ///Overload
     public void setMoney_Profit(int money_profit){
         this.money_profit = money_profit;
     }
