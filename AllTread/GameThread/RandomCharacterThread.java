@@ -3,6 +3,7 @@ package AllTread.GameThread;
 import AllMom.MomCharacter;
 import Character_component.*;
 import Link_Panel.GamePanel;
+import Sound.SoundPop;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Random;
@@ -92,6 +93,7 @@ public class RandomCharacterThread extends Thread {
             default -> new Bank(random_Move_int, 330, random_Move_int > 0 ? 1 : 0);
         };
         System.out.println("NPC = " + (charactersList.size() + 1));
+        SoundPop.play();
         g.add(m);
         g.setComponentZOrder(m, 1);
         charactersList.add(m);

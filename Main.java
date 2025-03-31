@@ -1,6 +1,7 @@
 import Link_Panel.GamePanel;
 import Link_Panel.MapMenuPanel;
 import Link_Panel.MenuPanel;
+import Sound.SoundGame;
 import java.awt.*;
 import javax.swing.*;
 
@@ -8,8 +9,11 @@ public class Main {
     private JFrame frame;
     private JPanel mainPanel;
     private CardLayout cardLayout;
+    private SoundGame player;
 
     public Main() {
+        SoundGame.play();
+        
         frame = new JFrame("Siam Dino");
         cardLayout = new CardLayout();
         mainPanel = new JPanel(cardLayout);

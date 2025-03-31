@@ -16,6 +16,8 @@ import Background_component.Store.*;
 import Button_component.ButtonMenu;
 import Button_component.ButtonShop;
 import DataBase.*;
+import Sound.SoundCoin;
+import Sound.SoundLevelUP;
 import java.awt.*;
 import java.util.*;
 import javax.swing.*;
@@ -99,6 +101,7 @@ public class GamePanel extends MomBackground {
                 ++l;
                 animal_1.put("Level", l);
                 exp+=200;
+                SoundLevelUP.play();
             }
         });
         jp.add(greenyShop);
@@ -109,6 +112,7 @@ public class GamePanel extends MomBackground {
                 ++l;
                 animal_2.put("Level", l);
                 exp+=200;
+                SoundLevelUP.play();
             }
         });
         jp.add(brownyShop);
@@ -119,6 +123,7 @@ public class GamePanel extends MomBackground {
                 ++l;
                 animal_7.put("Level", l);
                 exp+=200;
+                SoundLevelUP.play();
             }
         });
         jp.add(dodoShop);
@@ -129,6 +134,7 @@ public class GamePanel extends MomBackground {
                 ++l;
                 animal_5.put("Level", l);
                 exp+=200;
+                SoundLevelUP.play();
             }
         });
         jp.add(flyMeToTheMoonShop);
@@ -139,6 +145,7 @@ public class GamePanel extends MomBackground {
                 ++l;
                 animal_6.put("Level", l);
                 exp+=200;
+                SoundLevelUP.play();
             }
         });
         jp.add(rapterShop);
@@ -149,6 +156,7 @@ public class GamePanel extends MomBackground {
                 ++l;
                 animal_4.put("Level", l);
                 exp+=200;
+                SoundLevelUP.play();
             }
         });
         jp.add(reddyShop);
@@ -159,6 +167,7 @@ public class GamePanel extends MomBackground {
                 ++l;
                 animal_3.put("Level", l);
                 exp+=200;
+                SoundLevelUP.play();
             }
         });
         jp.add(stormFlyShop);
@@ -169,6 +178,7 @@ public class GamePanel extends MomBackground {
                 ++l;
                 store_2.put("Level", l);
                 exp+=30;
+                SoundLevelUP.play();
             }
         });
         jp.add(waterShop);
@@ -179,6 +189,7 @@ public class GamePanel extends MomBackground {
                 ++l;
                 store_1.put("Level", l);
                 exp+=150;
+                SoundLevelUP.play();
             }
         });
         jp.add(restaurantShop);
@@ -192,6 +203,7 @@ public class GamePanel extends MomBackground {
                 ++l;
                 store_3.put("Level", l);
                 exp+=200;
+                SoundLevelUP.play();
             }
         });
         jp.add(icecreamShop);
@@ -605,6 +617,7 @@ public class GamePanel extends MomBackground {
                             text.setBackground(Color.BLACK);
                             text.setBounds(50, 50, 30, 30);
                             food.add(text);
+                            SoundCoin.play();
                             Thread.sleep(1500);
                             food.removeAll();
                         }
@@ -639,6 +652,7 @@ public class GamePanel extends MomBackground {
                             text.setBackground(Color.BLACK);
                             text.setBounds(50, 50, 30, 30);
                             water.add(text);
+                            SoundCoin.play();
                             Thread.sleep(1500);
                             water.removeAll();
                         }
@@ -674,6 +688,7 @@ public class GamePanel extends MomBackground {
                             text.setBackground(Color.BLACK);
                             text.setBounds(50, 50, 30, 30);
                             icream.add(text);
+                            SoundCoin.play();
                             Thread.sleep(1500);
                             icream.removeAll();
                         }

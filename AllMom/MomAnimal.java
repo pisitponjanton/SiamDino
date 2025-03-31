@@ -4,6 +4,7 @@ import AllTread.AnimalThread.AnimationThread;
 import AllTread.AnimalThread.FeedAnimalThread;
 import AllTread.AnimalThread.MoveThread;
 import Link_Panel.GamePanel;
+import Sound.SoundEat;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.File;
@@ -50,6 +51,7 @@ public abstract class MomAnimal extends JPanel {
                     animationThread.running();
                     feedAnimalThread.running();
                     g.setExp(g.getExp()+75);
+                    SoundEat.play();
                 }
             }
         });
