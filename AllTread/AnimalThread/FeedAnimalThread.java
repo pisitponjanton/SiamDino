@@ -1,5 +1,6 @@
 package AllTread.AnimalThread;
 
+import AllMom.FontLoader;
 import AllMom.MomAnimal;
 import Sound.SoundHungry;
 import java.awt.*;
@@ -76,6 +77,7 @@ public class FeedAnimalThread extends Thread{
         label.setForeground(Color.WHITE);
         label.setBackground(Color.BLACK);
         label.setToolTipText("Click ME");
+        label.setFont(FontLoader.loadFont(14));
         label.setBounds(50, 50, 30, 30);
         SoundHungry.play();
         m.add(label);

@@ -622,6 +622,7 @@ public class GamePanel extends MomBackground {
                             text.setOpaque(true);
                             text.setForeground(Color.WHITE);
                             text.setBackground(Color.BLACK);
+                            text.setFont(FontLoader.loadFont(14));
                             text.setBounds(50, 50, 30, 30);
                             food.add(text);
                             SoundCoin.play();
@@ -657,6 +658,7 @@ public class GamePanel extends MomBackground {
                             text.setOpaque(true);
                             text.setForeground(Color.WHITE);
                             text.setBackground(Color.BLACK);
+                            text.setFont(FontLoader.loadFont(14));
                             text.setBounds(50, 50, 30, 30);
                             water.add(text);
                             SoundCoin.play();
@@ -693,6 +695,7 @@ public class GamePanel extends MomBackground {
                             text.setOpaque(true);
                             text.setForeground(Color.WHITE);
                             text.setBackground(Color.BLACK);
+                            text.setFont(FontLoader.loadFont(14));
                             text.setBounds(50, 50, 30, 30);
                             icream.add(text);
                             SoundCoin.play();
