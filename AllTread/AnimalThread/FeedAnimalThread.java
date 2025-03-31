@@ -72,7 +72,7 @@ public class FeedAnimalThread extends Thread{
     }
 
     public void showMessage(){
-        label = new JLabel("Hungry");
+        label = new JLabel("!!!");
         label.setOpaque(true);
         label.setForeground(Color.WHITE);
         label.setBackground(Color.BLACK);
