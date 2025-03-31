@@ -9,7 +9,6 @@ public class Main {
     private JFrame frame;
     private JPanel mainPanel;
     private CardLayout cardLayout;
-    private SoundGame player;
 
     public Main() {
         SoundGame.play();
