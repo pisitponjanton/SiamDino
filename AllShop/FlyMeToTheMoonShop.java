@@ -1,7 +1,7 @@
 package AllShop;
 
+import AllMom.FontLoader;
 import AllMom.MomButton;
-import java.awt.*;
 import javax.swing.*;
 
 public class FlyMeToTheMoonShop extends MomButton implements ShopStatus {
@@ -16,7 +16,7 @@ public class FlyMeToTheMoonShop extends MomButton implements ShopStatus {
         reMoney();
         moneyJLabel = new JLabel(money + "");
         moneyJLabel.setBounds(130, 92, 80, 20);
-        moneyJLabel.setFont(new Font("Arial", Font.BOLD, 20));
+        moneyJLabel.setFont(FontLoader.loadFont(12f));
         add(moneyJLabel);
 
     }

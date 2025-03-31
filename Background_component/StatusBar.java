@@ -1,5 +1,6 @@
 package Background_component;
 
+import AllMom.FontLoader;
 import AllMom.MomBackground;
 import java.awt.*;
 import javax.swing.*;
@@ -20,23 +21,23 @@ public class StatusBar extends MomBackground {
 
         this.name.setToolTipText("Name");
         this.name.setBounds(25, 0, 133, 30);
-        this.name.setFont(new Font("Arial", Font.BOLD, 20));
+        this.name.setFont(FontLoader.loadFont(13f));
         this.name.setForeground(Color.WHITE);
 
 
         this.level.setToolTipText("Level");
         this.level.setBounds(4, 0, 33, 32);
-        this.level.setFont(new Font("Arial", Font.BOLD, 16));
+        this.level.setFont(FontLoader.loadFont(13f));
         this.level.setForeground(Color.WHITE);
 
         this.money.setToolTipText("Money");
-        this.money.setBounds(175, 0, 124, 36);
-        this.money.setFont(new Font("Arial", Font.BOLD, 15));
+        this.money.setBounds(190, 0, 124, 36);
+        this.money.setFont(FontLoader.loadFont(10f));
         this.money.setForeground(Color.WHITE);
 
         this.exp.setToolTipText("Exp");
         this.exp.setBounds(0, 25, 300, 41);
-        this.exp.setFont(new Font("Arial", Font.BOLD, 15));
+        this.exp.setFont(FontLoader.loadFont(12f));
         this.exp.setForeground(Color.WHITE);
 
         add(this.name);
