@@ -7,6 +7,7 @@ import Button_component.ButtonBack;
 import Button_component.ButtonNew;
 import Button_component.Map_Button;
 import DataBase.*;
+import Sound.*;
 import java.awt.*;
 import javax.swing.*;
 
@@ -70,6 +71,7 @@ public class MapMenuPanel extends MomBackground {
                 if (!nameText.getName().equals("")) {
                     dataUser.getDataUser().add(new DataMap(nameText.getName()));
                     System.out.println("AddDataMap");
+                    SoundPop.play();
                     loadMap();
                 }
                 nameText.setVisible(false);
@@ -112,6 +114,8 @@ public class MapMenuPanel extends MomBackground {
             Map_Button b = new Map_Button(m.getName(), m.getLevel(), m.getMoney());
             b.addActionListener(_ -> {
                 try {
+                    SoundGame.stop();
+                    SoundInGame.play();
                     g.start_Game(dataUser, currentIndex,this);
                     cardLayout.show(mainPanel, "GamePanel");
                     System.out.println("GameStart");

@@ -2,12 +2,12 @@ package Sound;
 import java.io.*;
 import javax.sound.sampled.*;
 
-public class SoundGame {
+public class SoundInGame {
     private static Clip clip;
 
     private static void load(){
         try {
-            File soundFile = new File("Sound/wav/game.wav");
+            File soundFile = new File("Sound/wav/ingame.wav");
             AudioInputStream audioStream = AudioSystem.getAudioInputStream(soundFile);
             clip = AudioSystem.getClip();
             clip.open(audioStream);

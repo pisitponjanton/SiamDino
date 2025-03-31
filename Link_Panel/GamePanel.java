@@ -17,6 +17,9 @@ import Button_component.ButtonMenu;
 import Button_component.ButtonShop;
 import DataBase.*;
 import Sound.SoundCoin;
+import Sound.SoundGame;
+import Sound.SoundGameStop;
+import Sound.SoundInGame;
 import Sound.SoundLevelUP;
 import java.awt.*;
 import java.util.*;
@@ -226,6 +229,9 @@ public class GamePanel extends MomBackground {
         buttonMenu.addActionListener(_ -> {
             randomCharacterThread.cleanerList();
             this.stop_Game();
+            SoundInGame.stop();
+            SoundGameStop.play();
+            SoundGame.play();
             cardLayout.show(mainPanel, "MapMenuPanel");
         });
         add(buttonMenu);

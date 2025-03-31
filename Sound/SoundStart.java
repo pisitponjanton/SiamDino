@@ -2,12 +2,12 @@ package Sound;
 import java.io.*;
 import javax.sound.sampled.*;
 
-public class SoundGame {
+public class SoundStart {
     private static Clip clip;
 
     private static void load(){
         try {
-            File soundFile = new File("Sound/wav/game.wav");
+            File soundFile = new File("Sound/wav/start.wav");
             AudioInputStream audioStream = AudioSystem.getAudioInputStream(soundFile);
             clip = AudioSystem.getClip();
             clip.open(audioStream);
@@ -20,14 +20,7 @@ public class SoundGame {
         load();
         if (clip != null) {
             clip.setFramePosition(0);
-            clip.loop(Clip.LOOP_CONTINUOUSLY);
             clip.start();
-        }
-    }
-
-    public static  void stop() {
-        if (clip != null && clip.isRunning()) {
-            clip.stop();
         }
     }
 }

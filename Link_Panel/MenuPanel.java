@@ -4,6 +4,7 @@ import AllMom.Animation;
 import AllMom.MomBackground;
 import Background_component.NameGame;
 import Button_component.Start;
+import Sound.SoundStart;
 import java.awt.*;
 import javax.swing.*;
 
@@ -33,6 +34,7 @@ public class MenuPanel extends MomBackground {
         new Animation(startButton, 0);
         startButton.addActionListener(_ ->{
             cardLayout.show(mainPanel, "MapMenuPanel");
+            SoundStart.play();
             System.out.println("Start");
         });
         add(startButton);
