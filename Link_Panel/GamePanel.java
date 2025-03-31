@@ -21,6 +21,7 @@ import Sound.SoundGame;
 import Sound.SoundGameStop;
 import Sound.SoundInGame;
 import Sound.SoundLevelUP;
+import Sound.SoundPop2;
 import java.awt.*;
 import java.util.*;
 import javax.swing.*;
@@ -240,13 +241,13 @@ public class GamePanel extends MomBackground {
         buttonShop.setLocation(1230, 0);
         buttonShop.addActionListener(_ -> {
             sc.setVisible(!sc.isVisible());
+            SoundPop2.play();
         });
 
         statusBar = new StatusBar();
         add(statusBar);
         setComponentZOrder(statusBar, 0);
 
-        // add(t);
         add(buttonShop);
         allCage_Add();
 

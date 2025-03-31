@@ -62,11 +62,13 @@ public class MapMenuPanel extends MomBackground {
         buttonBack.setLocation(10,710);
         buttonBack.addActionListener(_->{
             cardLayout.show(mainPanel, "MenuPanel");
+            SoundPop2.play();
         });
 
         newButton = new ButtonNew();
         newButton.setLocation(620, 0);
         newButton.addActionListener(_ -> {
+            SoundPop2.play();
             if (nameText.isVisible()) {
                 if (!nameText.getName().equals("")) {
                     dataUser.getDataUser().add(new DataMap(nameText.getName()));
@@ -95,19 +97,18 @@ public class MapMenuPanel extends MomBackground {
         sp1.setBorder(null);
         add(buttonBack);
         add(sp1);
-        add(jp2);
-
-        if(dataUser.getDataUser().isEmpty()){
-            add(nameGame);
-            setComponentZOrder(nameGame, 0);
-        }
-        
+        add(jp2);        
 
     }
 
     public void loadMap() {
         i_num = 0;
-        remove(nameGame);
+        if(dataUser.getDataUser().isEmpty()){
+            add(nameGame);
+            setComponentZOrder(nameGame, 0);
+        }else{
+            remove(nameGame);
+        }
         jp1.removeAll();
         for (DataMap m : dataUser.getDataUser()) {
             final int currentIndex = i_num;
@@ -115,6 +116,7 @@ public class MapMenuPanel extends MomBackground {
             b.addActionListener(_ -> {
                 try {
                     SoundGame.stop();
+                    SoundPop2.play();
                     SoundInGame.play();
                     g.start_Game(dataUser, currentIndex,this);
                     cardLayout.show(mainPanel, "GamePanel");
@@ -127,6 +129,7 @@ public class MapMenuPanel extends MomBackground {
                 dataUser.getDataUser().remove(currentIndex);
                 loadMap();
                 System.out.println("DeleteMap "+currentIndex);
+                SoundPop2.play();
             });
             jp1.add(b);
             jp1.add(Box.createVerticalStrut(10));
