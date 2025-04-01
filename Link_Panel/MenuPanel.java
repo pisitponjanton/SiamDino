@@ -3,8 +3,8 @@ package Link_Panel;
 import AllMom.Animation;
 import AllMom.MomBackground;
 import Background_component.NameGame;
-import Button_component.Start;
-import Sound.SoundStart;
+import Button_component.*;
+import Sound.*;
 import java.awt.*;
 import javax.swing.*;
 
@@ -12,6 +12,7 @@ public class MenuPanel extends MomBackground {
     private Start startButton;
     private NameGame namegame;
     private int i;
+    private ButtonMute1 buttonMute1;
 
     public MenuPanel(CardLayout cardLayout, JPanel mainPanel) {
         super("bgset/0");
@@ -28,6 +29,22 @@ public class MenuPanel extends MomBackground {
         }).start();
 
         setLayout(null);
+
+        buttonMute1 = new ButtonMute1();
+        buttonMute1.addActionListener(_->{
+            if(buttonMute1.getNamePath().equals("mute1")){
+                buttonMute1.setNamePath("mute2");
+                SoundMusic.setP(false);
+                SoundGame.stop();
+                SoundInGame.stop();
+            }
+            else{
+                buttonMute1.setNamePath("mute1");
+                SoundMusic.setP(true);
+                SoundGame.play();
+            }
+        });
+        add(buttonMute1);
 
         startButton = new Start();
         startButton.setLocation(600, 400);

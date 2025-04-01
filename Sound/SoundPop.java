@@ -18,7 +18,7 @@ public class SoundPop {
 
     public static  void play() {
         load();
-        if (clip != null) {
+        if (clip != null && SoundMusic.p()) {
             clip.setFramePosition(0);
             clip.start();
         }

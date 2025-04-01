@@ -18,15 +18,15 @@ public class SoundInGame {
 
     public static  void play() {
         load();
-        if (clip != null) {
+        if (clip != null && SoundMusic.p()) {
             clip.setFramePosition(0);
             clip.loop(Clip.LOOP_CONTINUOUSLY);
             clip.start();
         }
     }
 
-    public static  void stop() {
-        if (clip != null && clip.isRunning()) {
+    public static void stop() {
+        if ((clip != null && clip.isRunning()) || SoundMusic.p()) {
             clip.stop();
         }
     }

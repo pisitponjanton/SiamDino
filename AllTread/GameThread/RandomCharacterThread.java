@@ -3,6 +3,7 @@ package AllTread.GameThread;
 import AllMom.MomCharacter;
 import Character_component.*;
 import Link_Panel.GamePanel;
+import Sound.SoundEasterEgg;
 import Sound.SoundPop;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -92,6 +93,9 @@ public class RandomCharacterThread extends Thread {
             case 4 -> new Fuy(random_Move_int, 330, random_Move_int > 0 ? 1 : 0);
             default -> new Bank(random_Move_int, 330, random_Move_int > 0 ? 1 : 0);
         };
+        if(m instanceof Bank ){
+            SoundEasterEgg.play();
+        }
         System.out.println("NPC = " + (charactersList.size() + 1));
         SoundPop.play();
         g.add(m);

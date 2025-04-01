@@ -2,12 +2,12 @@ package Sound;
 import java.io.*;
 import javax.sound.sampled.*;
 
-public class SoundHungry {
+public class SoundEasterEgg {
     private static Clip clip;
 
     private static void load(){
         try {
-            File soundFile = new File("Sound/wav/hungry.wav");
+            File soundFile = new File("Sound/wav/g.wav");
             AudioInputStream audioStream = AudioSystem.getAudioInputStream(soundFile);
             clip = AudioSystem.getClip();
             clip.open(audioStream);
