@@ -42,6 +42,7 @@ public class MenuPanel extends MomBackground {
                 buttonMute1.setNamePath("mute1");
                 SoundMusic.setP(true);
                 SoundGame.play();
+                SoundPop.play();
             }
         });
         add(buttonMute1);

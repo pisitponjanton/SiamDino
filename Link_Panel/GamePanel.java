@@ -17,6 +17,7 @@ import Button_component.ButtonMenu;
 import Button_component.ButtonShop;
 import DataBase.*;
 import Sound.SoundCoin;
+import Sound.SoundError;
 import Sound.SoundGame;
 import Sound.SoundGameStop;
 import Sound.SoundInGame;
@@ -69,8 +70,8 @@ public class GamePanel extends MomBackground {
     private JPanel jp;
     private JScrollPane sc;
 
-    private int level_1,level_2,level_3,level_4,level_5,level_6,level_7;
-    private int store_1_Level,store_2_Level,store_3_Level;
+    private int level_1, level_2, level_3, level_4, level_5, level_6, level_7;
+    private int store_1_Level, store_2_Level, store_3_Level;
 
     private BrownyShop brownyShop = new BrownyShop();
     private DodoShop dodoShop = new DodoShop();
@@ -95,125 +96,149 @@ public class GamePanel extends MomBackground {
         super("bggame");
 
         jp = new JPanel();
-        jp.setLayout(new GridLayout(4,3));
+        jp.setLayout(new GridLayout(4, 3));
         jp.setOpaque(false);
 
-        greenyShop.addActionListener(_->{
-            int l =  level_1;
-            if(l<10 && greenyShop.getMoney() <= money){
+        greenyShop.addActionListener(_ -> {
+            int l = level_1;
+            if (l < 10 && greenyShop.getMoney() <= money) {
                 money -= greenyShop.getMoney();
                 ++l;
                 animal_1.put("Level", l);
-                exp+=200;
+                exp += 200;
                 SoundLevelUP.play();
+            } else {
+                SoundError.play();
             }
         });
         jp.add(greenyShop);
-        brownyShop.addActionListener(_->{
-            int l =  level_2;
-            if(l<10 && brownyShop.getMoney() <= money){
+        brownyShop.addActionListener(_ -> {
+            int l = level_2;
+            if (l < 10 && brownyShop.getMoney() <= money) {
                 money -= brownyShop.getMoney();
                 ++l;
                 animal_2.put("Level", l);
-                exp+=200;
+                exp += 200;
                 SoundLevelUP.play();
+            } else {
+                SoundError.play();
             }
         });
         jp.add(brownyShop);
-        dodoShop.addActionListener(_->{
-            int l =  level_7;
-            if(l<10 && dodoShop.getMoney() <= money){
+        dodoShop.addActionListener(_ -> {
+            int l = level_7;
+            if (l < 10 && dodoShop.getMoney() <= money) {
                 money -= dodoShop.getMoney();
                 ++l;
                 animal_7.put("Level", l);
-                exp+=200;
+                exp += 200;
                 SoundLevelUP.play();
+            } else {
+                SoundError.play();
             }
         });
         jp.add(dodoShop);
-        flyMeToTheMoonShop.addActionListener(_->{
-            int l =  level_5;
-            if(l<10 && flyMeToTheMoonShop.getMoney() <= money){
+        flyMeToTheMoonShop.addActionListener(_ -> {
+            int l = level_5;
+            if (l < 10 && flyMeToTheMoonShop.getMoney() <= money) {
                 money -= flyMeToTheMoonShop.getMoney();
                 ++l;
                 animal_5.put("Level", l);
-                exp+=200;
+                exp += 200;
                 SoundLevelUP.play();
+            } else {
+                SoundError.play();
             }
         });
         jp.add(flyMeToTheMoonShop);
-        rapterShop.addActionListener(_->{
-            int l =  level_6;
-            if(l<10 && rapterShop.getMoney() <= money){
+        rapterShop.addActionListener(_ -> {
+            int l = level_6;
+            if (l < 10 && rapterShop.getMoney() <= money) {
                 money -= rapterShop.getMoney();
                 ++l;
                 animal_6.put("Level", l);
-                exp+=200;
+                exp += 200;
                 SoundLevelUP.play();
+            } else {
+                SoundError.play();
             }
         });
         jp.add(rapterShop);
-        reddyShop.addActionListener(_->{
-            int l =  level_4;
-            if(l<10 && reddyShop.getMoney() <= money){
+        reddyShop.addActionListener(_ -> {
+            int l = level_4;
+            if (l < 10 && reddyShop.getMoney() <= money) {
                 money -= reddyShop.getMoney();
                 ++l;
                 animal_4.put("Level", l);
-                exp+=200;
+                exp += 200;
                 SoundLevelUP.play();
+            } else {
+                SoundError.play();
             }
         });
         jp.add(reddyShop);
-        stormFlyShop.addActionListener(_->{
-            int l =  level_3;
-            if(l<10 && stormFlyShop.getMoney() <= money){
+        stormFlyShop.addActionListener(_ -> {
+            int l = level_3;
+            if (l < 10 && stormFlyShop.getMoney() <= money) {
                 money -= stormFlyShop.getMoney();
                 ++l;
                 animal_3.put("Level", l);
-                exp+=200;
+                exp += 200;
                 SoundLevelUP.play();
+            } else {
+                SoundError.play();
             }
         });
         jp.add(stormFlyShop);
-        waterShop.addActionListener(_->{
-            int l =  store_2_Level;
-            if(l<10 && waterShop.getMoney() <= money){
+        waterShop.addActionListener(_ -> {
+            int l = store_2_Level;
+            if (l < 10 && waterShop.getMoney() <= money) {
                 money -= waterShop.getMoney();
                 ++l;
                 store_2.put("Level", l);
-                exp+=30;
+                exp += 30;
                 SoundLevelUP.play();
+            } else {
+                SoundError.play();
             }
         });
         jp.add(waterShop);
-        restaurantShop.addActionListener(_->{
-            int l =  store_1_Level;
-            if(l<10 && restaurantShop.getMoney() <= money){
+        restaurantShop.addActionListener(_ -> {
+            int l = store_1_Level;
+            if (l < 10 && restaurantShop.getMoney() <= money) {
                 money -= restaurantShop.getMoney();
                 ++l;
                 store_1.put("Level", l);
-                exp+=150;
+                exp += 150;
                 SoundLevelUP.play();
+            } else {
+                SoundError.play();
             }
         });
         jp.add(restaurantShop);
-        jp.add(new JPanel() {{
-            setOpaque(false);
-        }});
-        icecreamShop.addActionListener(_->{
-            int l =  store_3_Level;
-            if(l<10 && icecreamShop.getMoney() <= money){
+        jp.add(new JPanel() {
+            {
+                setOpaque(false);
+            }
+        });
+        icecreamShop.addActionListener(_ -> {
+            int l = store_3_Level;
+            if (l < 10 && icecreamShop.getMoney() <= money) {
                 money -= icecreamShop.getMoney();
                 ++l;
                 store_3.put("Level", l);
-                exp+=200;
+                exp += 200;
                 SoundLevelUP.play();
+            } else {
+                SoundError.play();
             }
         });
         jp.add(icecreamShop);
-        jp.add(new JPanel() {{
-            setOpaque(false);
-        }});
+        jp.add(new JPanel() {
+            {
+                setOpaque(false);
+            }
+        });
 
         sc = new JScrollPane(jp, JScrollPane.VERTICAL_SCROLLBAR_NEVER, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
         sc.setBounds(350, 100, 650, 540);
@@ -253,7 +278,7 @@ public class GamePanel extends MomBackground {
 
     }
 
-    public void start_Game(DataUser dataUser, int index,MapMenuPanel mapMenuPanel) {
+    public void start_Game(DataUser dataUser, int index, MapMenuPanel mapMenuPanel) {
         this.mapMenuPanel = mapMenuPanel;
         this.dataUser = dataUser;
         dataMap = dataUser.getDataUser().get(index);
@@ -284,7 +309,7 @@ public class GamePanel extends MomBackground {
                     randomCharacterThread.setLevel(level);
                     // money+= randomCharacterThread.getMoney();
                     statusBar.setName(name);
-                    checkCharacter.setMax_Character(dataMap.getMax_Character()*countAnimal);
+                    checkCharacter.setMax_Character(dataMap.getMax_Character() * countAnimal);
                     Thread.sleep(10);
                 }
             } catch (InterruptedException e) {
@@ -425,7 +450,7 @@ public class GamePanel extends MomBackground {
                 browny.startMove();
                 ++countAnimal;
             }
-            browny.setToolTipText("Level: "+browny.getLevel());
+            browny.setToolTipText("Level: " + browny.getLevel());
             browny.setEvo(evo_2);
             browny.setLevel(level_2);
         }
@@ -442,7 +467,7 @@ public class GamePanel extends MomBackground {
                 stormFly.startMove();
                 ++countAnimal;
             }
-            stormFly.setToolTipText("Level: "+stormFly.getLevel());
+            stormFly.setToolTipText("Level: " + stormFly.getLevel());
             stormFly.setEvo(evo_3);
             stormFly.setLevel(level_3);
         }
@@ -459,7 +484,7 @@ public class GamePanel extends MomBackground {
                 reddy.startMove();
                 ++countAnimal;
             }
-            reddy.setToolTipText("Level: "+reddy.getLevel());
+            reddy.setToolTipText("Level: " + reddy.getLevel());
             reddy.setEvo(evo_4);
             reddy.setLevel(level_4);
         }
@@ -476,7 +501,7 @@ public class GamePanel extends MomBackground {
                 flyMeToTheMoon.startMove();
                 ++countAnimal;
             }
-            flyMeToTheMoon.setToolTipText("Level: "+flyMeToTheMoon.getLevel());
+            flyMeToTheMoon.setToolTipText("Level: " + flyMeToTheMoon.getLevel());
             flyMeToTheMoon.setEvo(evo_5);
             flyMeToTheMoon.setLevel(level_5);
         }
@@ -493,7 +518,7 @@ public class GamePanel extends MomBackground {
                 rapter.startMove();
                 ++countAnimal;
             }
-            rapter.setToolTipText("Level: "+rapter.getLevel());
+            rapter.setToolTipText("Level: " + rapter.getLevel());
             rapter.setEvo(evo_6);
             rapter.setLevel(level_6);
         }
@@ -510,7 +535,7 @@ public class GamePanel extends MomBackground {
                 dodo.startMove();
                 ++countAnimal;
             }
-            dodo.setToolTipText("Level: "+dodo.getLevel());
+            dodo.setToolTipText("Level: " + dodo.getLevel());
             dodo.setEvo(evo_7);
             dodo.setLevel(level_7);
         }
@@ -571,7 +596,6 @@ public class GamePanel extends MomBackground {
             flyMeToTheMoonShop.stopThread();
         }
 
-
         if (rapter != null) {
             c7.setVisible(false);
             rapter.stopMove();
@@ -611,14 +635,13 @@ public class GamePanel extends MomBackground {
                 food.setLevel(store_1_Level);
                 food.startStore();
 
-
-                money_Food = new Thread(()->{
-                    try{
+                money_Food = new Thread(() -> {
+                    try {
                         while (true) {
                             Thread.sleep(food.getTime());
                             money += food.getMoney_Profit();
                             exp += 30;
-                            JLabel text = new JLabel("+ "+food.getMoney_Profit(),JLabel.CENTER);
+                            JLabel text = new JLabel("+ " + food.getMoney_Profit(), JLabel.CENTER);
                             text.setOpaque(true);
                             text.setForeground(Color.WHITE);
                             text.setBackground(Color.BLACK);
@@ -634,7 +657,7 @@ public class GamePanel extends MomBackground {
                 });
                 money_Food.start();
             }
-            food.setToolTipText("Level: "+food.getLevel());
+            food.setToolTipText("Level: " + food.getLevel());
             food.setEvo(store_1_Evo);
             food.setLevel(store_1_Level);
         }
@@ -648,13 +671,13 @@ public class GamePanel extends MomBackground {
                 water.setLevel(store_2_Level);
                 water.startStore();
 
-                money_Water = new Thread(()->{
-                    try{
-                        while (true) { 
+                money_Water = new Thread(() -> {
+                    try {
+                        while (true) {
                             Thread.sleep(water.getTime());
                             money += water.getMoney_Profit();
                             exp += 30;
-                            JLabel text = new JLabel("+ "+water.getMoney_Profit(),JLabel.CENTER);
+                            JLabel text = new JLabel("+ " + water.getMoney_Profit(), JLabel.CENTER);
                             text.setOpaque(true);
                             text.setForeground(Color.WHITE);
                             text.setBackground(Color.BLACK);
@@ -670,7 +693,7 @@ public class GamePanel extends MomBackground {
                 });
                 money_Water.start();
             }
-            water.setToolTipText("Level: "+water.getLevel());
+            water.setToolTipText("Level: " + water.getLevel());
             water.setEvo(store_2_Evo);
             water.setLevel(store_2_Level);
         }
@@ -684,14 +707,13 @@ public class GamePanel extends MomBackground {
                 icream.setLevel(store_3_Level);
                 icream.startStore();
 
-
-                money_Icream = new Thread(()->{
-                    try{
-                        while (true) { 
+                money_Icream = new Thread(() -> {
+                    try {
+                        while (true) {
                             Thread.sleep(icream.getTime());
                             money += icream.getMoney_Profit();
                             exp += 30;
-                            JLabel text = new JLabel("+ "+icream.getMoney_Profit(),JLabel.CENTER);
+                            JLabel text = new JLabel("+ " + icream.getMoney_Profit(), JLabel.CENTER);
                             text.setOpaque(true);
                             text.setForeground(Color.WHITE);
                             text.setBackground(Color.BLACK);
@@ -707,7 +729,7 @@ public class GamePanel extends MomBackground {
                 });
                 money_Icream.start();
             }
-            icream.setToolTipText("Level: "+icream.getLevel());
+            icream.setToolTipText("Level: " + icream.getLevel());
             icream.setEvo(store_3_Evo);
             icream.setLevel(store_3_Level);
         }
@@ -743,139 +765,129 @@ public class GamePanel extends MomBackground {
         }
     }
 
-    private void evoEvo(){
-        if(level_1<4){
+    private void evoEvo() {
+        if (level_1 < 4) {
             animal_1.put("Evo", 0);
             cage[0] = 0;
-        }else if(level_1>=4 && level_1<7){
+        } else if (level_1 >= 4 && level_1 < 7) {
             animal_1.put("Evo", 1);
             cage[0] = 1;
-        }
-        else{
+        } else {
             animal_1.put("Evo", 2);
             cage[0] = 2;
         }
 
-        if(level_2<4){
+        if (level_2 < 4) {
             animal_2.put("Evo", 0);
             cage[1] = 0;
-        }else if(level_2>=4 && level_2<7){
+        } else if (level_2 >= 4 && level_2 < 7) {
             animal_2.put("Evo", 1);
             cage[1] = 1;
-        }
-        else{
+        } else {
             animal_2.put("Evo", 2);
             cage[1] = 2;
         }
 
-        if(level_3<4){
+        if (level_3 < 4) {
             animal_3.put("Evo", 0);
             cage[5] = 0;
-        }else if(level_3>=4 && level_3<7){
+        } else if (level_3 >= 4 && level_3 < 7) {
             animal_3.put("Evo", 1);
             cage[5] = 1;
-        }
-        else{
+        } else {
             animal_3.put("Evo", 2);
             cage[5] = 2;
         }
 
-        if(level_4<4){
+        if (level_4 < 4) {
             animal_4.put("Evo", 0);
             cage[2] = 0;
-        }else if(level_4>=4 && level_4<7){
+        } else if (level_4 >= 4 && level_4 < 7) {
             animal_4.put("Evo", 1);
             cage[2] = 1;
-        }
-        else{
+        } else {
             animal_4.put("Evo", 2);
             cage[2] = 2;
         }
 
-        if(level_5<4){
+        if (level_5 < 4) {
             animal_5.put("Evo", 0);
             cage[4] = 0;
-        }else if(level_5>=4 && level_5<7){
+        } else if (level_5 >= 4 && level_5 < 7) {
             animal_5.put("Evo", 1);
             cage[4] = 1;
-        }
-        else{
+        } else {
             animal_5.put("Evo", 2);
             cage[4] = 2;
         }
 
-        if(level_6<4){
+        if (level_6 < 4) {
             animal_6.put("Evo", 0);
             cage[6] = 0;
-        }else if(level_6>=4 && level_6<7){
+        } else if (level_6 >= 4 && level_6 < 7) {
             animal_6.put("Evo", 1);
             cage[6] = 1;
-        }
-        else{
+        } else {
             animal_6.put("Evo", 2);
             cage[6] = 2;
         }
 
-        if(level_7<4){
+        if (level_7 < 4) {
             animal_7.put("Evo", 0);
             cage[3] = 0;
-        }else if(level_7>=4 && level_7<7){
+        } else if (level_7 >= 4 && level_7 < 7) {
             animal_7.put("Evo", 1);
             cage[3] = 1;
-        }
-        else{
+        } else {
             animal_7.put("Evo", 2);
             cage[3] = 2;
         }
 
-        if(store_1_Level<4){
+        if (store_1_Level < 4) {
             store_1.put("Evo", 0);
-        }else if(store_1_Level>=4 && store_1_Level<7){
+        } else if (store_1_Level >= 4 && store_1_Level < 7) {
             store_1.put("Evo", 1);
-        }
-        else{
+        } else {
             store_1.put("Evo", 2);
         }
 
-        if(store_2_Level<4){
+        if (store_2_Level < 4) {
             store_2.put("Evo", 0);
-        }else if(store_2_Level>=4 && store_2_Level<7){
+        } else if (store_2_Level >= 4 && store_2_Level < 7) {
             store_2.put("Evo", 1);
-        }
-        else{
+        } else {
             store_2.put("Evo", 2);
         }
 
-        if(store_3_Level<4){
+        if (store_3_Level < 4) {
             store_3.put("Evo", 0);
-        }else if(store_3_Level>=4 && store_3_Level<7){
+        } else if (store_3_Level >= 4 && store_3_Level < 7) {
             store_3.put("Evo", 1);
-        }
-        else{
+        } else {
             store_3.put("Evo", 2);
         }
     }
 
-    public void setMoney(double money){
+    public void setMoney(double money) {
         this.money = money;
     }
 
-    public double getMoney(){
+    public double getMoney() {
         return this.money;
     }
 
-    public void evoLevel(){
-        if(exp>=(level*700) && level<30){
-            level+=1;
+    public void evoLevel() {
+        if (exp >= (level * 700) && level < 30) {
+            level += 1;
             exp = 0;
         }
     }
 
-    public void setExp(int exp){
+    public void setExp(int exp) {
         this.exp = exp;
     }
 
-    public int getExp(){
+    public int getExp() {
         return this.exp;
     }
 }
